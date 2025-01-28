@@ -1,0 +1,270 @@
+*{
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    display: flex;
+    background-color: rgba( 0, 0, 0, 0.2) ;
+    background-image: url('/images/majetek/vila.png');
+    background-size: cover;
+  }
+  
+  @font-face {
+    font-family: poppins;
+    src: url('/fonts/Poppins-Black.ttf');
+  }
+  
+  @font-face {
+    font-family: poppins-light;
+    src: url('/fonts/Poppins-Light.ttf');
+  }
+  
+  .sidebar {
+    background-image: url('/images/sidebar/sidebar_pic.png');
+    background-size: cover;
+    color: #ffffff;
+    width: 60px;
+    height: 100vh;
+    overflow: hidden;
+    transition: width 0.3s ease;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .sidebar:hover {
+    width: 200px;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+  
+  .sidebar ul li {
+    display: flex;
+    align-items: center;
+    padding: 17.6px;
+    text-align: center;
+    overflow: hidden;
+  }
+  
+  .sidebar ul li .icon {
+    color: #ffffff;
+    font-size: 20px;
+    margin-right: 10px;
+    width: 30px;
+    text-align: center;
+  }
+  
+  .sidebar ul li .text {
+    color: #ffffff;
+    display: none;
+    white-space: nowrap;
+    font-family: poppins;
+    font-size: 15px;
+  }
+  
+  .sidebar:hover ul li .text {
+    display: inline-block;
+  }
+  
+  .vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    font-size: 20px;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: transform 0.3s ease, writing-mode 0.3s ease;
+    font-family: poppins;
+  }
+  
+  .sidebar:hover .vertical-text {
+    writing-mode: horizontal-tb;
+    transform: translateY(-50%) rotate(0deg);
+    left: 10%;
+    letter-spacing: 5px;
+  }
+  
+  /*Button*/
+  button{
+    background-color: rgb(0, 148, 0);
+    border: 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba( 0, 0, 0, 0.2);
+    color: #ffffff;
+    padding: 10px 25px;
+    font-family: poppins;
+    margin-bottom: 8px;
+  }
+  
+  button.close {
+  position: absolute; /* Absolutní pozicování */
+  bottom: 20px; /* Od spodního okraje modalu */
+  right: 20px; /* Od pravého okraje modalu */
+  background-color: rgb(177, 1, 1); /* Barva tlačítka */
+  color: #fff; /* Bílý text */
+  border: none; /* Bez rámečku */
+  padding: 10px 20px; /* Vnitřní okraje tlačítka */
+  border-radius: 5px; /* Zaoblené rohy */
+  font-family: poppins; /* Font */
+  font-size: 16px; /* Velikost textu */
+  cursor: pointer; /* Ukazatel myši */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Stín tlačítka */
+}
+
+  button.close:hover{
+    background-color: rgb(200, 0, 0);
+  } 
+
+  button:hover{
+    background-color: rgb(1, 134, 1);
+  }
+  
+/*Gallerie*/
+div.gallery {
+  border: 3px solid #ccc;
+  background-color: rgba( 0, 0, 0, 0.3);    
+  float: left;
+  max-width: 400px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  margin-top: 10px;
+}
+
+div.gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+}
+
+div.desc {
+  padding: 10px;
+  text-align: center;
+  color: #ffffff;
+  font-weight: bold;
+  font-family: poppins;
+  display: flex;
+  justify-content: center;
+}
+
+.margin{
+  margin-left: 120px;
+}
+
+.modal-container{
+  background-color: rgba(78, 78, 78, 0.678);
+  position: fixed;
+  pointer-events: none;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  transition: opacity 0.3s ease;
+  font-family: poppins-light;
+}
+
+.modal-container.show{
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.modal{
+  background-color: #444;
+  box-shadow: 0 2px 4px rgba( 0, 0, 0, 0.2);
+  color: #ffffff;
+  padding: 30px 50px;
+  border-radius: 5px;
+  width: 1000px;
+  height: 800px;
+  max-width: 100%;
+  text-align: left;
+  position: relative;
+}
+
+.modal img {
+  margin-bottom: 20px;
+  max-height: 400px;
+}
+
+
+.blod{
+  font-family: poppins;
+}
+  
+/*Navigations modal*/
+.slider {
+  position: relative;
+  max-width: 80%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.slides {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+}
+
+.slide {
+  display: none;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.slide.active {
+  display: block;
+
+}
+
+button.prev,
+button.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  font-size: 24px;
+  padding: 0px;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+button.prev {
+  left: 10px;
+}
+
+button.next {
+  right: 10px;
+}
+
+button.prev:hover,
+button.next:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}

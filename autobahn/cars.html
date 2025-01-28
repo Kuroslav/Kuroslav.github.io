@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autobahn - Vozidla</title>
+    <link rel="stylesheet" href="css/cars.css">
+    <script src="https://kit.fontawesome.com/3e6e8225e1.js" crossorigin="anonymous"></script>
+    <link rel="website icon" type="png" href=""> 
+</head>
+<body>
+
+    <div class="sidebar" id="sidebar">
+        <ul>
+            <li>
+                <a href="index.html"><span class="icon"><i class="fa fa-fw fa-home"></i></span></a>
+                <a href="index.html"><span class="text">Domů</span></a>
+            </li>
+            <li>
+                <a href="cars.html"><span class="icon"><i class="fa-solid fa-car"></i></span></a>
+                <a href="cars.html"><span class="text">Prodej Vozidel</span></a>
+            </li>
+            <li>
+                <a href="ex-buy.html"><span class="icon"><i class="fa-regular fa-handshake"></i></span></a>
+                <a href="ex-buy.html"><span class="text">Výměna/Výkup</span></a>
+            </li>
+            <li>
+                <a href="parts.html"><span class="icon"><i class="fa-solid fa-screwdriver-wrench"></i></span></a>
+                <a href="parts.html"><span class="text">Autodíly</span></a>
+            </li>
+            <li>
+                <a href="estates.html"><span class="icon"><i class="fa-solid fa-shop"></i></span></a>
+                <a href="estates.html"><span class="text">Nemovitosti</span></a>
+            </li>
+            <li>
+                <a href="contacts.html"><span class="icon"><i class="fa-solid fa-phone"></i></span></a>
+                <a href="contacts.html"><span class="text">Kontakty</span></a>
+            </li>
+            <div class="vertical-text">AUTOBAHN</div>
+        </ul>
+    </div>
+
+    <div class="site-content-cars">
+        <!-- Site info -->
+        <h1 class="nadpis">Prodej Vozidel</h1>
+        <p class="info">Nabídka kvalitních vozidel za skvělé ceny. Veškeré úpravy vozidel si můžete prohlédnout přímo na webu!</p>
+        <p class="info">Pokud máte nějaké zajímavé vozidlo na výměnu/prodej, neváhejte se ozvat <a class="hyper" href="ex-buy.html">Zde</a>!</p>
+        <h2 class="cars">Nabízená vozidla:</h2>
+
+        <div class=" margin">
+      <!-- Galerie Vozidel CLS500-->
+        <div class="gallery">
+              <img src="images/vozidla/soutez_cls.PNG" alt="Mercedes Benz CLS500" width="600" height="400">
+              <div class="desc">Mercedes Benz CLS500</div>
+              <!-- Button na otevření modalu -->
+              <button id="open1">Více</button>
+
+              <div class="modal-container" id="modal_container1">
+                <div class="modal">
+                    <h1>Informace o vozidlu</h1>
+                    <p><b class="blod">VIN:</b> 19456</p>
+                    <p><b class="blod">Řídící jednotka:</b> Úprava ECU - výkon</p>
+                    <p><b class="blod">Omezovač:</b> Žádný</p>
+                    <p><b class="blod">Motor:</b> Motor s turbem</p>
+                    <p><b class="blod">Geometrie:</b> Seřízení geometrie T2</p>
+                    <p class="price"><b class="blod">Celková cena:</b> 1 500 000Kč</p>
+                    <button class="close" data-modal="modal_container1">
+                        Zavřít
+                    </button>
+                </div>
+              </div>
+
+          </div>
+
+        <!-- Galerie Vozidel Supra-->
+          <div class="gallery">
+                <img src="images/vozidla/soutez_cls.PNG" alt="Toyota Supra" width="600" height="400">
+                <div class="desc">Toyota Supra</div>
+                <!-- Button na otevření modalu -->
+                <button id="open2">Více</button>
+  
+                <div class="modal-container" id="modal_container2">
+                  <div class="modal">
+                      <h1>Informace o vozidlu</h1>
+                      <p><b class="blod">VIN:</b> 17328</p>
+                      <p><b class="blod">Šířka Zadních pneu:</b> Velmi široká</p>
+                      <p><b class="blod">Šířka Předních pneu:</b> Široká</p>
+                      <p><b class="blod">Řídící jednotka:</b> Úprava ECU - výkon</p>
+                      <p><b class="blod">Omezovač:</b> Žádný</p>
+                      <p><b class="blod">Motor:</b> Motor s twin-turbem</p>
+                      <p><b class="blod">Zámek otáčení:</b> Zvýšený zámek +8</p>
+                      <p><b class="blod">Těžiště:</b> Zatížená přední část</p>
+                      <p><b class="blod">Brzdy:</b> Silnější brzdy</p>
+                      <p><b class="blod">Pásy:</b> Závodní šestibodové</p>
+                      <p><b class="blod">Spoiler:</b> Alien J</p>
+                      <p><b class="blod">Geometrie:</b> Seřízení geometrie T2</p>
+                      <p><b class="blod">Ochranné prvky:</b> Základní bezp. rám (OCEL)</p>
+                      <p class="price"><b class="blod">Celková cena:</b> 1 275 000 Kč</p>
+                      <button class="close" data-modal="modal_container2"> 
+                          Zavřít
+                      </button>
+                  </div>
+                </div>
+            </div>
+
+        <!-- Galerie Vozidel S4 Avant-->
+          <div class="gallery">
+                <img src="images/vozidla/soutez_cls.PNG" alt="Audi S4 Avant" width="600" height="400">
+                <div class="desc">Audi S4  Avant</div>
+                <!-- Button na otevření modalu -->
+                <button id="open3">Více</button>
+  
+                <div class="modal-container" id="modal_container3">
+                  <div class="modal">
+                      <h1>Informace o vozidlu</h1>
+                      <p><b class="blod">VIN:</b> 20989</p>
+                      <p><b class="blod">Typ kol:</b> Shadow</p>
+                      <p><b class="blod">Šířka Zadních pneu:</b> Široká</p>
+                      <p><b class="blod">Šířka Předních pneu:</b> Široká</p>
+                      <p><b class="blod">Řídící jednotka:</b> Úprava ECU - výkon</p>
+                      <p><b class="blod">Omezovač:</b> Žádný</p>
+                      <p><b class="blod">Motor:</b> Motor s turbem</p>
+                      <p><b class="blod">Zámek otáčení:</b> Zvýšený zámek +8</p>
+                      <p><b class="blod">Brzdy:</b> Silnější brzdy</p>
+                      <p><b class="blod">Pásy:</b> Závodní šestibodové</p>
+                      <p><b class="blod">Geometrie:</b> Seřízení geometrie T2</p>
+                      <p><b class="blod">Ochranné prvky:</b> Základní bezp. polo-rám (OCEL)</p>
+                      <p class="price"><b class="blod">Celková cena:</b> 950 000 Kč</p>
+                      <button class="close" data-modal="modal_container3">Zavřít</button>
+                  </div>
+                </div>
+            </div>
+
+    
+
+            <!-- Galerie Vozidel 530i xDrive-->
+            <div class="gallery">
+                <img src="images/vozidla/soutez_cls.PNG" alt="BMW XDrive" width="600" height="400">
+                <div class="desc">BMW M5 530i xDrive</div>
+
+                <!-- Button na otevření modalu -->
+                <button id="open4">Více</button>
+  
+                <div class="modal-container" id="modal_container4">
+                  <div class="modal">
+                      <h1>Informace o vozidlu</h1>
+                      <p><b class="blod">VIN:</b> -----</p>
+                      <p><b class="blod">Řídící jednotka:</b> Úprava ECU - výkon</p>
+                      <p><b class="blod">Omezovač:</b> Žádný</p>
+                      <p><b class="blod">Motor:</b> Motor s turbem</p>
+                      <p><b class="blod">Zámek otáčení:</b> Zvýšený zámek +8</p>
+                      <p><b class="blod">Brzdy:</b> Silnější brzdy</p>
+                      <p><b class="blod">Pásy:</b> Závodní šestibodové</p>
+                      <p class="price"><b class="blod">Celková cena:</b> 1 000 000 Kč</p>
+                      <button class="close" data-modal="modal_container4">Zavřít</button>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--Script pro buttony na modal-->
+    <script src="scripts/cars-modal.js"></script>
+</body>
+</html>

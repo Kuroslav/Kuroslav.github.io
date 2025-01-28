@@ -1,0 +1,151 @@
+*{
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  background-color: #2B2D42;
+}
+
+@font-face {
+  font-family: poppins;
+  src: url('/fonts/Poppins-Black.ttf');
+}
+
+@font-face {
+  font-family: poppins-light;
+  src: url('/fonts/Poppins-Light.ttf');
+}
+
+.sidebar {
+  background-image: url('/images/sidebar/sidebar_pic.png');
+  background-size: cover;
+  color: #ffffff;
+  width: 60px;
+  height: 100vh;
+  overflow: hidden;
+  transition: width 0.3s ease;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar:hover {
+  width: 200px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.sidebar ul li {
+  display: flex;
+  align-items: center;
+  padding: 17.6px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.sidebar ul li .icon {
+  color: #ffffff;
+  font-size: 20px;
+  margin-right: 10px;
+  width: 30px;
+  text-align: center;
+}
+
+.sidebar ul li .text {
+  color: #ffffff;
+  display: none;
+  white-space: nowrap;
+  font-family: poppins;
+  font-size: 15px;
+}
+
+.sidebar:hover ul li .text {
+  display: inline-block;
+}
+  
+  .site-content-contacts {
+    padding: 20px;
+    text-align: center;
+    width: calc(100% - 60px);
+    transition: margin-left 0.3s ease;
+    margin-left: 80px;
+  }
+  
+  .vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    font-size: 20px;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: transform 0.3s ease, writing-mode 0.3s ease;
+    font-family: poppins;
+  }
+  
+  .sidebar:hover .vertical-text {
+    writing-mode: horizontal-tb;
+    transform: translateY(-50%) rotate(0deg);
+    left: 10%;
+    letter-spacing: 5px;
+  }
+  
+  /*Kontaktní údaje*/
+  h2.personal{
+    font-family: poppins;
+    color: #ffffff;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+  
+  h2.role{
+    font-family: poppins;
+    color: #ffffff;
+    float: left;
+  }
+  
+  h1.name{
+    font-family: poppins;
+    font-size: 20px;
+    float: left;
+    color: #ffffff;
+  }
+  
+  p.info{
+    font-family: poppins;
+    color: #ffffff;
+    float: left;
+  }
+  
+  /* Container */
+  .container {
+    position: relative;
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: #3A7D44;
+    border: 3px solid white;
+    padding: 20px 15px;
+    border-radius: 5px;
+    flex-direction: column;
+  }
+  
+  .containers-wrapper {
+    display: flex; /* Aktivuje flexbox pro rodiče */
+    justify-content: center; /* Zarovná kontejnery na střed (vodorovně) */
+    gap: 20px; /* Přidá mezery mezi kontejnery */
+  }
+  
+  
+  
