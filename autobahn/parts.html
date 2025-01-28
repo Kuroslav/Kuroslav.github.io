@@ -1,88 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Autobahn - Autodíly</title>
-    <link rel="stylesheet" href="css/parts.css">
-    <script src="https://kit.fontawesome.com/3e6e8225e1.js" crossorigin="anonymous"></script>
-    <link rel="website icon" type="png" href=""> 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autodíly</title>
+  <link rel="stylesheet" href="/css/parts.css">
+  <script src="https://kit.fontawesome.com/3e6e8225e1.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <script src="/scripts/parts-script.js"></script>
 </head>
 <body>
-    
-    <div class="sidebar" id="sidebar">
-        <ul>
-            <li>
-                <a href="index.html"><span class="icon"><i class="fa fa-fw fa-home"></i></span></a>
-                <a href="index.html"><span class="text">Domů</span></a>
-            </li>
-            <li>
-                <a href="cars.html"><span class="icon"><i class="fa-solid fa-car"></i></span></a>
-                <a href="cars.html"><span class="text">Prodej Vozidel</span></a>
-            </li>
-            <li>
-                <a href="ex-buy.html"><span class="icon"><i class="fa-regular fa-handshake"></i></span></a>
-                <a href="ex-buy.html"><span class="text">Výměna/Výkup</span></a>
-            </li>
-            <li>
-                <a href="parts.html"><span class="icon"><i class="fa-solid fa-screwdriver-wrench"></i></span></a>
-                <a href="parts.html"><span class="text">Autodíly</span></a>
-            </li>
-            <li>
-                <a href="estates.html"><span class="icon"><i class="fa-solid fa-shop"></i></span></a>
-                <a href="estates.html"><span class="text">Nemovitosti</span></a>
-            </li>
-            <li>
-                <a href="contacts.html"><span class="icon"><i class="fa-solid fa-phone"></i></span></a>
-                <a href="contacts.html"><span class="text">Kontakty</span></a>
-            </li>
-            <div class="vertical-text">AUTOBAHN</div>
-        </ul>
+  <div class="sidebar" id="sidebar">
+    <ul>
+        <li>
+            <a href="index.html"><span class="icon"><i class="fa fa-fw fa-home"></i></span></a>
+            <a href="index.html"><span class="text">Domů</span></a>
+        </li>
+        <li>
+            <a href="cars.html"><span class="icon"><i class="fa-solid fa-car"></i></span></a>
+            <a href="cars.html"><span class="text">Prodej Vozidel</span></a>
+        </li>
+        <li>
+            <a href="ex-buy.html"><span class="icon"><i class="fa-regular fa-handshake"></i></span></a>
+            <a href="ex-buy.html"><span class="text">Výměna/Výkup</span></a>
+        </li>
+        <li>
+            <a href="parts.html"><span class="icon"><i class="fa-solid fa-screwdriver-wrench"></i></span></a>
+            <a href="parts.html"><span class="text">Autodíly</span></a>
+        </li>
+        <li>
+            <a href="estates.html"><span class="icon"><i class="fa-solid fa-shop"></i></span></a>
+            <a href="estates.html"><span class="text">Nemovitosti</span></a>
+        </li>
+        <li>
+            <a href="contacts.html"><span class="icon"><i class="fa-solid fa-phone"></i></span></a>
+            <a href="contacts.html"><span class="text">Kontakty</span></a>
+        </li>
+        <div class="vertical-text">AUTOBAHN</div>
+    </ul>
+  </div>
+  
+  <div class="container">
+    <h1>Autodíly</h1>
+    <div class="image-container">
+      <img src="/images/parts/car-parts.png" alt="Autodíl">
     </div>
-
-        <div class="site-content">
-            <section id="home" class="hero">
-
-                <div class="text-wrapper-left">
-                <div class="text">
-                  <h1>Autodíly</h1>
-                  <p>Vysoce kvalitní autodíly, vhodné pro tunning vašeho vozidla</p>
-                  <button class="buy-now">Koupit</button>
-                </div>
-              </div>
-              <div class="image-wrapper">
-                <img src="images/parts/parts.png" alt="Autodíl" class="product-image">
-              </div>
-              <div class="text-wrapper-right">
-                  <div class="tetx-right">
-                      <h1>Technické parametry</h1>
-                      <p><strong>Výrobce:</strong> Schneider Group</p>
-                      <p><strong>Cena:</strong> 7 500 000 Kč</p>
-                      <p><strong>Dostupnost:</strong><a class="sklad-dostupne">4ks na skladě</a></p>
-            </section>
-            
-            <section id="contacts" class="contacts">
-                    <h2>Kontakní údaje</h2>
-
-                    <div class="service-list"> <!-- Používáme stejnou strukturu jako u služeb -->
-                        <div class="service-item">
-                            <h3></h3>
-                            <p><b class="pozice">Personalista</b><br><b>Email:</b><br><b>Telefon:</b></p>
-                        </div>
-            
-                        <div class="service-item">
-                            <h3></h3>
-                            <p><b class="pozice">Personalista</b><br><b>Email:</b><br><b>Telefon:</b></p>
-                        </div>
-                    </div>
-
-            </section>
-
-                 <!--  <div class="logo-wrapper">
-                        <img src="/images/SG.png" alt="Logo firmy" class="logo">
-                    </div> 
-                     -->  
-        </div>
-          
+    <div class="price">Cena: 7.500.000 Kč</div>
+    <div class="availability" id="availability">
+      Dostupnost: <span id="stockStatus">Skladem</span>
+    </div>    
+    <form id="orderForm">
+      <input type="text" name="firstName" placeholder="Jméno" required>
+      <input type="text" name="lastName" placeholder="Příjmení" required>
+      <input type="email" name="email" placeholder="Post" required>
+      <input type="tel" name="phone" placeholder="Telefoní číslo" required>
+      <input type="number" id="quantity" name="quantity" placeholder="Počet" required min="1">
+      <button type="submit" id="orderButton">Objednat</button>
+    </form>
+    <a href="#" id="adminButton" class="admin-button">Přehled objednávek</a>
+    <!-- Přidáme tlačítko pro resetování zásob -->
+    <a href="#" id="resetStockButton" class="reset-stock-button">Obnovit sklad</a>
+  </div>
 </body>
 </html>

@@ -1,12 +1,18 @@
 *{
-    box-sizing: border-box;
-  }
-  
-  body {
+  box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
     margin: 0;
-    display: flex; 
-    background-image: linear-gradient(rgb(175, 175, 175), rgb(121, 120, 120));
-    height: 100vh;
+    padding: 0;
+    box-sizing: border-box;
+    background-image: linear-gradient(to right,#C04848,#480048);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Umožní scrollování až nahoru */
+    height: auto; /* Aby výška těla byla automatická */
+    min-height: 100vh; /* Ujistíme se, že výška stránky je alespoň 100% */
   }
   
   @font-face {
@@ -31,6 +37,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    left: 0;
     z-index: 1000;
   }
   
@@ -72,7 +79,7 @@
   .sidebar:hover ul li .text {
     display: inline-block;
   }
-
+  
   .vertical-text {
     writing-mode: vertical-rl;
     text-orientation: upright;
@@ -91,139 +98,130 @@
     left: 10%;
     letter-spacing: 5px;
   }
-  
-  .site-content {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    padding: 0 20px;
-  }
-  
-  .text-wrapper-left {
-    position: fixed;
-    left: 100px;
-    top: 20%;
-    max-width: 800px;
-  }
 
-  .text-wrapper-right {
-    position: fixed;
-    right: 150px;
-    top: 20%;
-  }
-  
-  .image-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
-  }
-  
-  .logo-wrapper {
-    bottom: 20px;
-    right: 20px; 
-  }
-  
-  .logo {
-    max-width: 150px;
-    height: auto;
-  }
-
-  .text {
-    max-width: 400px;
-  }
-  
-  .text-right {
-    max-width: 400px;
-  }
-  .product-image {
-    max-width: 500px;
-    border-radius: 10px;
-  }
-  
-  h1 {
-    font-size: 24px;
-    margin: 0 0 10px;
-    font-family: poppins;
-    color: #ffffff;
-  }
-  
-  p {
-    margin: 5px 0;
-    color: #ffffff;
-    font-family: poppins-light;
-    font-size: 20px;
-  }
-  
-  .buy-now {
-    margin-top: 10px;
-    padding: 20px 30px;
-    background-color: #be0000;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 16px;
-    font-family: poppins;
-  }
-  
-  .buy-now:hover {
-    background-color: #970303;
-  }
-
-  .sklad-dostupne{
-    color: green;
-    text-decoration: underline;
-    margin-left: 5px;
-  }
-
-  .sklad-nedostupne{
-    color: rgb(160, 0, 0);
-    text-decoration: underline;
-    margin-left: 5px;
-  }
-
-  .hero {
-    color: white;
-    text-align: center;
-    padding: 100px 20px;
-}
-
-.hero-content {
-    background-color: rgba(0, 0, 0, 0.5); /* Poloprůhledné pozadí pro lepší čitelnost textu */
+  .container {
     padding: 20px;
-    height: 800px;
-}
+    max-width: 600px;
+    width: 100%;
+    background: rgb(139, 139, 139);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+      h1 {
+        color: #ffffff;
+        font-family: poppins;
+      }
 
-.about, .services, .contacts {
-  padding: 50px 20px;
-  margin-top: 1000px;
-}
+      .image-container img {
+        max-width: 100%;
+        border-radius: 10px;
+      }
+      .price {
+        margin: 20px 0;
+        font-size: 1.5rem;
+        color: #ffffff;
+        font-weight: bold;
+      }
 
-.about h2, .services h2, .contacts h2 {
-  text-align: center; /* Vycentrování nadpisu */
-}
+      .availability {
+        margin: 10px 0;
+        font-size: 1rem;
+        font-weight: bold;
+        color: #ffffff;
+      }
+      
+      #stockStatus {
+        font-weight: normal;
+      }
+      
+      .in-stock {
+        color: green; /* Zelená pro skladem */
+      }
+      
+      .out-of-stock {
+        color: red; /* Červená pro nedostupné */
+      }      
 
-b.pozice{
-  font-size: 18px;
-}
+      form {
+        margin-top: 20px;
+      }
 
-.service-list {
-  display: flex;
-  justify-content: space-around; /* Rozložení položek do řady */
-}
+      input, button {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+      }
 
-.service-item {
-  background-color: #8f8f8f; /* Světle šedé pozadí pro položky služeb a vedení */
-  border-radius: 10px; /* Zaoblené rohy pro položky */
-  padding: 8px 20px; /* Vnitřní odsazení */
-  margin: 10px; /* Vnější odsazení */
-  flex-basis: 30%; /* Šířka položky */
-  width: 800px;
-}
-.service-item .service-image {
-  max-width: 25%; /* Maximální šířka obrázku */
-  height: 25%; /* Automatická výška pro zachování poměru stran */
-  border-radius: 20px;
-}
+      button {
+        background-color: #8a1212;
+        color: white;
+        cursor: pointer;
+        border: none;
+        font-family: poppins-light;
+      }
+
+      button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+
+      button:hover:not(:disabled) {
+        background-color: #6e0a0a;
+      }
+      
+      #adminButton {
+        position: fixed;  /* Umístí tlačítko fixně na stránku */
+        bottom: 20px;     /* Tlačítko bude 20px od dolního okraje */
+        left: 80px;       /* Tlačítko bude 20px od levého okraje */
+        background-color: #28a745;
+        color: white;
+        text-decoration: none;
+        padding: 10px;
+        border-radius: 5px;
+        font-weight: bold;
+        display: block;
+      }
+      
+      #adminButton:hover {
+        background-color: #218838;
+      }
+
+      .reset-stock-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #dc3545; /* Červená barva pro zvýraznění */
+        color: white;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-weight: bold;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+      
+      .reset-stock-button:hover {
+        background-color: #c82333; /* Tmavší červená po najetí */
+      }
+      
+      input[type=text]{
+        text-align: center;
+      }
+
+      input[type=email]{
+        text-align: center;
+      }
+
+      input[type=number]{
+        text-align: center;
+      }
+
+      input[type=tel]{
+        text-align: center;
+      }
