@@ -11,16 +11,16 @@ body {
 
 @font-face {
   font-family: poppins;
-  src: url('/fonts/Poppins-Black.ttf');
+  src: url('/autobahn/fonts/Poppins-Black.ttf');
 }
 
 @font-face {
   font-family: poppins-light;
-  src: url('/fonts/Poppins-Light.ttf');
+  src: url('/autobahn/fonts/Poppins-Light.ttf');
 }
 
 .sidebar {
-  background-image: url('/images/sidebar/sidebar_pic.png');
+  background-image: url("/autobahn/images/sidebar/sidebar_pic.png");
   background-size: cover;
   color: #ffffff;
   width: 60px;
