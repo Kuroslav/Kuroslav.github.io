@@ -209,19 +209,3 @@ body {
       .reset-stock-button:hover {
         background-color: #c82333; /* Tmavší červená po najetí */
       }
-      
-      input[type=text]{
-        text-align: center;
-      }
-
-      input[type=email]{
-        text-align: center;
-      }
-
-      input[type=number]{
-        text-align: center;
-      }
-
-      input[type=tel]{
-        text-align: center;
-      }
