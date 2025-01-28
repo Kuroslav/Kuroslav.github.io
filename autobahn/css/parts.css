@@ -26,7 +26,7 @@ body {
   }
   
   .sidebar {
-    background-image: url("/autobahn/images/sidebar/sidebar_pic.png")
+    background-image: url("/autobahn/images/sidebar/sidebar_pic.png");
     background-size: cover;
     color: #ffffff;
     width: 60px;
