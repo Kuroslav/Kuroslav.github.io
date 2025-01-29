@@ -1,20 +1,35 @@
 document.addEventListener('DOMContentLoaded', () => {
-  let stockCount = localStorage.getItem('stockCount');
-  if (!stockCount) {
+  let stockCount = parseInt(localStorage.getItem('stockCount'), 10);
+  if (isNaN(stockCount)) {
     stockCount = 4;
-    localStorage.setItem('stockCount', stockCount);
+    localStorage.setItem('stockCount', stockCount.toString());
   }
+
+  function updateAvailability(count) {
+    const stockStatus = document.getElementById('stockStatus');
+    if (count > 0) {
+      stockStatus.textContent = `Skladem (${count})`;
+      stockStatus.classList.remove('out-of-stock');
+      stockStatus.classList.add('in-stock');
+    } else {
+      stockStatus.textContent = 'Nedostupný';
+      stockStatus.classList.remove('in-stock');
+      stockStatus.classList.add('out-of-stock');
+    }
+    quantityInput.setAttribute('max', count);
+  }
+
   updateAvailability(stockCount);
 
   const quantityInput = document.getElementById('quantity');
   const orderButton = document.getElementById('orderButton');
 
   function disableOrderButton() {
-    orderButton.disabled = true;
+    if (orderButton) orderButton.disabled = true;
   }
 
   function enableOrderButton() {
-    orderButton.disabled = false;
+    if (orderButton) orderButton.disabled = false;
   }
 
   if (stockCount <= 0) {
@@ -54,14 +69,14 @@ document.addEventListener('DOMContentLoaded', () => {
       quantity: quantity
     };
 
-    sendToDiscord(order); // Odeslání objednávky na Discord
+    sendToDiscord(order);
 
     const orders = JSON.parse(localStorage.getItem('orders')) || [];
     orders.push(order);
     localStorage.setItem('orders', JSON.stringify(orders));
 
     stockCount -= quantity;
-    localStorage.setItem('stockCount', stockCount);
+    localStorage.setItem('stockCount', stockCount.toString());
     updateAvailability(stockCount);
 
     alert('Objednávka byla úspěšně odeslána!');
@@ -73,24 +88,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  function updateAvailability(count) {
-    const stockStatus = document.getElementById('stockStatus');
-    if (count > 0) {
-      stockStatus.textContent = `Skladem (${count})`;
-      stockStatus.classList.remove('out-of-stock');
-      stockStatus.classList.add('in-stock');
-    } else {
-      stockStatus.textContent = 'Nedostupný';
-      stockStatus.classList.remove('in-stock');
-      stockStatus.classList.add('out-of-stock');
-    }
-    quantityInput.setAttribute('max', count);
-  }
-
   const resetStockButton = document.getElementById('resetStockButton');
   resetStockButton.addEventListener('click', () => {
     const password = prompt('Zadejte heslo pro obnovení zásob:');
-    const adminPassword = atob('c2dyZXN0b2Nr'); // "sgrestock" v base64
+    const adminPassword = atob('c2dyZXN0b2Nr'); // "sgrestock"
 
     if (password === adminPassword) {
       const restockAmount = prompt('Zadejte, kolik položek chcete přidat na sklad:');
@@ -101,8 +102,8 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      stockCount = (parseInt(localStorage.getItem('stockCount'), 10) || 0) + restockCount;
-      localStorage.setItem('stockCount', stockCount);
+      stockCount += restockCount;
+      localStorage.setItem('stockCount', stockCount.toString());
       updateAvailability(stockCount);
       alert(`Sklad byl obnoven o ${restockCount} položek!`);
     } else {
@@ -113,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const adminButton = document.getElementById('adminButton');
   adminButton.addEventListener('click', () => {
     const password = prompt('Zadejte heslo pro přístup k přehledu objednávek:');
-    const correctPassword = atob('c2ctMjAyNQ=='); // "sg-2025" v base64
+    const correctPassword = atob('c2ctMjAyNQ=='); // "sg-2025"
 
     if (password === correctPassword) {
       window.location.href = 'overwiev.html';
@@ -124,15 +125,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function generateOrderId() {
     const orders = JSON.parse(localStorage.getItem('orders')) || [];
-    if (orders.length === 0) {
-      return 1;
-    }
-    const maxId = Math.max(...orders.map(order => order.id));
-    return maxId + 1;
+    return orders.length === 0 ? 1 : Math.max(...orders.map(order => order.id)) + 1;
   }
 
   function sendToDiscord(order) {
-    const webhookURL = "https://discord.com/api/webhooks/1334031581873967184/oH8ks4jbvewVhGFEmfax47Gt-6PUhdaY_gum5zUxeX9fY0KdvLiaTcbVdpja9v9LqSCi"; // Sem vlož URL webhooku
+    const webhookURL = localStorage.getItem('discordWebhook') || "https://discord.com/api/webhooks/1334031581873967184/oH8ks4jbvewVhGFEmfax47Gt-6PUhdaY_gum5zUxeX9fY0KdvLiaTcbVdpja9v9LqSCi";
 
     const embed = {
       title: "📦 Nová objednávka!",
@@ -150,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch(webhookURL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ embeds: [embed] })
+      body: JSON.stringify({ username: "Autodíly", embeds: [embed] })
     })
     .then(response => {
       if (!response.ok) {
