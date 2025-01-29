@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   let stockCount = localStorage.getItem('stockCount');
   if (!stockCount) {
-    stockCount = 4;  // Výchozí počet, pokud není uložen v localStorage
+    stockCount = 4;  
     localStorage.setItem('stockCount', stockCount);
   }
   updateAvailability(stockCount);
@@ -9,27 +9,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const quantityInput = document.getElementById('quantity');
   const orderButton = document.getElementById('orderButton');
 
-  // Funkce pro deaktivaci tlačítka "Objednat"
   function disableOrderButton() {
     orderButton.disabled = true;
   }
 
-  // Funkce pro aktivaci tlačítka "Objednat"
   function enableOrderButton() {
     orderButton.disabled = false;
   }
 
-  // Pokud je zásoba 0 nebo méně, deaktivujeme tlačítko "Objednat"
   if (stockCount <= 0) {
     disableOrderButton();
   } else {
     enableOrderButton();
   }
 
-  // Nastavení maximální hodnoty na základě aktuálního stavu zásob
   quantityInput.setAttribute('max', stockCount);
 
-  // Přidáme listener pro změnu počtu v inputu
   quantityInput.addEventListener('input', () => {
     const quantity = parseInt(quantityInput.value, 10);
     if (quantity > stockCount) {
@@ -69,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('stockCount', stockCount);
     updateAvailability(stockCount);
 
-       alert('Objednávka byla úspěšně odeslána!');
+    alert('Objednávka byla úspěšně odeslána!');
     form.reset();
     quantityInput.setAttribute('max', stockCount);
     if (stockCount <= 0) {
@@ -111,14 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch(error => console.error("Chyba:", error));
   }
-    
-    // Po odeslání objednávky znovu aktualizujeme max a kontrolujeme dostupnost
-    quantityInput.setAttribute('max', stockCount);
-    if (stockCount <= 0) {
-      disableOrderButton();
-    }
-  });
-  
+
   function updateAvailability(count) {
     const stockStatus = document.getElementById('stockStatus');
     if (count > 0) {
@@ -131,52 +119,55 @@ document.addEventListener('DOMContentLoaded', () => {
       stockStatus.classList.add('out-of-stock');
     }
 
-    // Dynamická aktualizace max pro input
     const quantityInput = document.getElementById('quantity');
-    quantityInput.setAttribute('max', count); // Dynamicky aktualizujeme max
+    quantityInput.setAttribute('max', count);
   }
 
   const resetStockButton = document.getElementById('resetStockButton');
-  resetStockButton.addEventListener('click', () => {
-    const password = prompt('Zadejte heslo pro obnovení zásob:');
-    const adminPassword = atob('c2dyZXN0b2Nr');
+  if (resetStockButton) {
+    resetStockButton.addEventListener('click', () => {
+      const password = prompt('Zadejte heslo pro obnovení zásob:');
+      const adminPassword = atob('c2dyZXN0b2Nr');
 
-    if (password === adminPassword) {
-      const restockAmount = prompt('Zadejte, kolik položek chcete přidat na sklad:');
-      const restockCount = parseInt(restockAmount, 10);
+      if (password === adminPassword) {
+        const restockAmount = prompt('Zadejte, kolik položek chcete přidat na sklad:');
+        const restockCount = parseInt(restockAmount, 10);
 
-      if (isNaN(restockCount) || restockCount <= 0) {
-        alert('Zadejte platný počet položek.');
-        return;
+        if (isNaN(restockCount) || restockCount <= 0) {
+          alert('Zadejte platný počet položek.');
+          return;
+        }
+
+        stockCount = (parseInt(localStorage.getItem('stockCount'), 10) || 0) + restockCount;
+        localStorage.setItem('stockCount', stockCount);
+        updateAvailability(stockCount);
+        alert(`Sklad byl obnoven o ${restockCount} položek!`);
+      } else {
+        alert('Nesprávné heslo!');
       }
-
-      stockCount = (parseInt(localStorage.getItem('stockCount'), 10) || 0) + restockCount;
-      localStorage.setItem('stockCount', stockCount);
-      updateAvailability(stockCount);
-      alert(`Sklad byl obnoven o ${restockCount} položek!`);
-    } else {
-      alert('Nesprávné heslo!');
-    }
-  });
+    });
+  }
 
   const adminButton = document.getElementById('adminButton');
-  adminButton.addEventListener('click', () => {
-    const password = prompt('Zadejte heslo pro přístup k přehledu objednávek:');
-    const correctPassword = atob('c2ctMjAyNQ==');
+  if (adminButton) {
+    adminButton.addEventListener('click', () => {
+      const password = prompt('Zadejte heslo pro přístup k přehledu objednávek:');
+      const correctPassword = atob('c2ctMjAyNQ==');
 
-    if (password === correctPassword) {
-      window.location.href = 'overwiev.html';
-    } else {
-      alert('Nesprávné heslo!');
-    }
-  });
+      if (password === correctPassword) {
+        window.location.href = 'overview.html';
+      } else {
+        alert('Nesprávné heslo!');
+      }
+    });
+  }
 
   function generateOrderId() {
     const orders = JSON.parse(localStorage.getItem('orders')) || [];
     if (orders.length === 0) {
       return 1;
     }
-    const maxId = Math.max(...orders.map(order => order.id));
+    const maxId = Math.max(...orders.map(order => order.id || 0)); 
     return maxId + 1;
   }
 });
