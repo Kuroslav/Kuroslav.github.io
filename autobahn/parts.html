@@ -49,17 +49,17 @@
     <div class="availability" id="availability">
       Dostupnost: <span id="stockStatus">Skladem</span>
     </div>    
-    <form id="orderForm">
-      <input type="text" name="firstName" placeholder="Jméno" required>
-      <input type="text" name="lastName" placeholder="Příjmení" required>
-      <input type="email" name="email" placeholder="Post" required>
-      <input type="tel" name="phone" placeholder="Telefoní číslo" required>
-      <input type="number" id="quantity" name="quantity" placeholder="Počet" required min="1">
-      <button type="submit" id="orderButton">Objednat</button>
-    </form>
-    <a href="#" id="adminButton" class="admin-button">Přehled objednávek</a>
-    <!-- Přidáme tlačítko pro resetování zásob -->
-    <a href="#" id="resetStockButton" class="reset-stock-button">Obnovit sklad</a>
+    <form id="orderForm" action="javascript:void(0);">
+  <input type="text" name="firstName" placeholder="Jméno" required>
+  <input type="text" name="lastName" placeholder="Příjmení" required>
+  <input type="email" name="email" placeholder="Email" required>
+  <input type="tel" name="phone" placeholder="Telefonní číslo" required>
+  <input type="number" id="quantity" name="quantity" placeholder="Počet" required min="1">
+  <button type="submit" id="orderButton">Objednat</button>
+</form>
+
+<button id="adminButton" class="admin-button">Přehled objednávek</button>
+<button id="resetStockButton" class="reset-stock-button">Obnovit sklad</button>
   </div>
 </body>
 </html>
