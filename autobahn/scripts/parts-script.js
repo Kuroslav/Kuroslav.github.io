@@ -82,13 +82,13 @@ document.addEventListener('DOMContentLoaded', () => {
       embeds: [
         {
           title: "📋 Detaily objednávky",
-          color: 3447003, 
+          color: "#ffeb25", 
           fields: [
-            { name: "👤 Jméno", value: `${order.firstName} ${order.lastName}`, inline: true },
-            { name: "📧 Email", value: order.email, inline: true },
-            { name: "📞 Telefon", value: order.phone, inline: true },
-            { name: "📦 Počet kusů", value: `${order.quantity}`, inline: false },
-            { name: "🆔 Číslo objednávky", value: `${order.id}`, inline: false }
+            { name: "💳 Jméno", value: `${order.firstName} ${order.lastName}`},
+            { name: "✉️ Email", value: order.email},
+            { name: "📱 Telefon", value: order.phone},
+            { name: "📦 Počet", value: `${order.quantity}`},
+            { name: "🗂️ Číslo objednávky", value: `${order.id}`}
           ],
           footer: { text: "Odesláno z webové aplikace" }
         }
