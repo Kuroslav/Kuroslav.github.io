@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
       embeds: [
         {
           title: "📋 Detaily objednávky",
-          color: "0xffeb25", 
+          color: ffeb25, 
           fields: [
             { name: "💳 Jméno", value: `${order.firstName} ${order.lastName}`},
             { name: "✉️ Email", value: order.email},
