@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
     adminButton.addEventListener('click', () => {
       const password = prompt('Zadejte heslo pro přístup k přehledu objednávek:');
       const correctPassword = atob('c2ctMjAyNQ==');
-      if (password === correctPassword) { alert("jsem tady")
+      if (password === correctPassword) {
         window.location.href = '/autobahn/overview.html';
       } else {
         alert('Nesprávné heslo!');
