@@ -1,38 +1,35 @@
 document.addEventListener('DOMContentLoaded', () => {
   let stockCount = localStorage.getItem('stockCount');
   if (!stockCount) {
-    stockCount = 4;  // Výchozí počet, pokud není uložen v localStorage
+    stockCount = 4;
     localStorage.setItem('stockCount', stockCount);
   }
   updateAvailability(stockCount);
 
   const quantityInput = document.getElementById('quantity');
   const orderButton = document.getElementById('orderButton');
-  
-  // Pokud je zásoba 0 nebo méně, deaktivujeme tlačítko "Objednat"
-  if (stockCount <= 0) {
+
+  function disableOrderButton() {
     orderButton.disabled = true;
   }
 
-  // Nastavení maximální hodnoty na základě aktuálního stavu zásob
+  function enableOrderButton() {
+    orderButton.disabled = false;
+  }
+
+  if (stockCount <= 0) {
+    disableOrderButton();
+  } else {
+    enableOrderButton();
+  }
+
   quantityInput.setAttribute('max', stockCount);
-  
-  // Přidáme listener pro změnu počtu v inputu
-  quantityInput.addEventListener('input', () => {
-    const quantity = parseInt(quantityInput.value, 10);
-    if (quantity > stockCount) {
-      quantityInput.setCustomValidity('Zadejte počet, který není vyšší než dostupný na skladě.');
-    } else {
-      quantityInput.setCustomValidity('');
-    }
-  });
 
   const form = document.getElementById('orderForm');
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const quantity = parseInt(quantityInput.value, 10);
-
     if (isNaN(quantity) || quantity <= 0 || quantity > stockCount) {
       alert('Zadejte platný počet kusů, který nepřesahuje dostupný počet na skladě.');
       return;
@@ -59,13 +56,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
     alert('Objednávka byla úspěšně odeslána!');
     form.reset();
-
-    // Po odeslání objednávky znovu aktualizujeme max a kontrolujeme dostupnost
     quantityInput.setAttribute('max', stockCount);
     if (stockCount <= 0) {
-      orderButton.disabled = true;
+      disableOrderButton();
     }
+
+    sendToDiscord(order);
   });
+
+  function sendToDiscord(order) {
+    const webhookURL = "";
+    const message = {
+      content: "**Nová objednávka!** 📦",
+      embeds: [
+        {
+          title: "📋 Detaily objednávky",
+          color: ab0202, 
+          fields: [
+            { name: "👤 Jméno", value: `${order.firstName} ${order.lastName}`, inline: true },
+            { name: "📧 Email", value: order.email, inline: true },
+            { name: "📞 Telefon", value: order.phone, inline: true },
+            { name: "📦 Počet kusů", value: `${order.quantity}`, inline: false },
+            { name: "🆔 Číslo objednávky", value: `${order.id}`, inline: false }
+          ],
+          footer: { text: "Odesláno z webové aplikace" }
+        }
+      ]
+    };
+
+    fetch(webhookURL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(message)
+    })
+    .then(response => {
+      if (!response.ok) throw new Error("Chyba při odesílání na Discord");
+      console.log("Objednávka byla odeslána na Discord!");
+    })
+    .catch(error => console.error("Chyba:", error));
+  }
 
   function updateAvailability(count) {
     const stockStatus = document.getElementById('stockStatus');
@@ -78,49 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
       stockStatus.classList.remove('in-stock');
       stockStatus.classList.add('out-of-stock');
     }
-    
-    // Dynamická aktualizace max pro input
-    const quantityInput = document.getElementById('quantity');
-    quantityInput.setAttribute('max', count); // Dynamicky aktualizujeme max
   }
-
-  const encodedRestockPassword = 'c2dyZXN0b2Nr';
-  const encodedAdminPassword = 'c2ctMjAyNQ==';
-
-  const resetStockButton = document.getElementById('resetStockButton');
-  resetStockButton.addEventListener('click', () => {
-    const password = prompt('Zadejte heslo pro obnovení zásob:');
-    const adminPassword = atob(encodedRestockPassword);
-
-    if (password === adminPassword) {
-      const restockAmount = prompt('Zadejte, kolik položek chcete přidat na sklad:');
-      const restockCount = parseInt(restockAmount, 10);
-
-      if (isNaN(restockCount) || restockCount <= 0) {
-        alert('Zadejte platný počet položek.');
-        return;
-      }
-
-      stockCount = (parseInt(localStorage.getItem('stockCount'), 10) || 0) + restockCount;
-      localStorage.setItem('stockCount', stockCount);
-      updateAvailability(stockCount);
-      alert(`Sklad byl obnoven o ${restockCount} položek!`);
-    } else {
-      alert('Nesprávné heslo!');
-    }
-  });
-
-  const adminButton = document.getElementById('adminButton');
-  adminButton.addEventListener('click', () => {
-    const password = prompt('Zadejte heslo pro přístup k přehledu objednávek:');
-    const correctPassword = atob(encodedAdminPassword);
-
-    if (password === correctPassword) {
-      window.location.href = 'overwiev.html';
-    } else {
-      alert('Nesprávné heslo!');
-    }
-  });
 
   function generateOrderId() {
     const orders = JSON.parse(localStorage.getItem('orders')) || [];
