@@ -176,36 +176,36 @@ body {
         background-color: #6e0a0a;
       }
       
-      #adminButton {
-        position: fixed;  /* Umístí tlačítko fixně na stránku */
-        bottom: 20px;     /* Tlačítko bude 20px od dolního okraje */
-        left: 80px;       /* Tlačítko bude 20px od levého okraje */
-        background-color: #28a745;
-        color: white;
-        text-decoration: none;
-        padding: 10px;
-        border-radius: 5px;
-        font-weight: bold;
-        display: block;
-      }
-      
-      #adminButton:hover {
-        background-color: #218838;
-      }
+     #adminButton {
+    position: fixed;
+    bottom: 20px;
+    left: 20px; /* Posunul jsem tlačítko více doleva */
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: poppins-light;
+}
 
-      .reset-stock-button {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background-color: #dc3545; /* Červená barva pro zvýraznění */
-        color: white;
-        text-decoration: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        font-weight: bold;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      }
-      
-      .reset-stock-button:hover {
-        background-color: #c82333; /* Tmavší červená po najetí */
-      }
+#adminButton:hover {
+    background-color: #218838;
+}
+
+#resetStockButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: poppins-light;
+}
+
+#resetStockButton:hover {
+    background-color: #c82333;
+}
