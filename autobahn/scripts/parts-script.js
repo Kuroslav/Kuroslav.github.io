@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function sendToDiscord(order) {
-    const webhookURL = "";
+    const webhookURL = "https://discord.com/api/webhooks/1334031581873967184/oH8ks4jbvewVhGFEmfax47Gt-6PUhdaY_gum5zUxeX9fY0KdvLiaTcbVdpja9v9LqSCi";
     const message = {
       content: "**Nová objednávka!** 📦",
       embeds: [
