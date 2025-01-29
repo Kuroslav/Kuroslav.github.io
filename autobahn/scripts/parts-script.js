@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
       embeds: [
         {
           title: "📋 Detaily objednávky",
-          color: parseInt("ffeb25", 16), 
+          color: 16773669,
           fields: [
             { name: "💳 Jméno", value: `${order.firstName} ${order.lastName}`},
             { name: "✉️ Email", value: order.email},
