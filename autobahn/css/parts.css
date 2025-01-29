@@ -180,7 +180,7 @@ body {
     position: fixed;
     bottom: 20px;
     left: 80px !important; /* Posunul jsem tlačítko více doleva */
-    max-width: 80px;
+    max-width: 150px;
     background-color: #28a745;
     color: white;
     padding: 10px 20px;
@@ -198,7 +198,7 @@ body {
     position: fixed;
     bottom: 20px; 
     right: 20px !important;
-    max-width: 80px;
+    max-width: 150px;
     background-color: #dc3545;
     color: white;
     padding: 10px 20px;
