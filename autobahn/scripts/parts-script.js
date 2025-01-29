@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const correctPassword = atob('c2ctMjAyNQ==');
 
       if (password === correctPassword) {
-        window.location.href = 'overview.html';
+        window.location.href = '/autobahn/overview.html';
       } else {
         alert('Nesprávné heslo!');
       }
