@@ -148,13 +148,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+
   const adminButton = document.getElementById('adminButton');
   if (adminButton) {
     adminButton.addEventListener('click', () => {
       const password = prompt('Zadejte heslo pro přístup k přehledu objednávek:');
       const correctPassword = atob('c2ctMjAyNQ==');
 
-      if (password === correctPassword) {
+      if (password === correctPassword) console.log("jsem tady"){
         window.location.href = '/autobahn/overview.html';
       } else {
         alert('Nesprávné heslo!');
