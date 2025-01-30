@@ -1,217 +1,231 @@
-*{
+* {
   box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background-image: linear-gradient(to right,#C04848,#480048);
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-image: linear-gradient(to right, #C04848, #480048);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+/* Fonty */
+@font-face {
+  font-family: poppins;
+  src: url('/autobahn/fonts/Poppins-Black.ttf');
+}
+
+@font-face {
+  font-family: poppins-light;
+  src: url('/autobahn/fonts/Poppins-Light.ttf');
+}
+
+/* RESPONSIVNÍ SIDEBAR */
+.sidebar {
+  background-image: url('/autobahn/images/sidebar/sidebar_pic.png');
+  background-size: cover;
+  color: #ffffff;
+  width: 60px;
+  height: 100vh;
+  overflow: hidden;
+  transition: width 0.3s ease;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  left: 0;
+  z-index: 1000;
+}
+
+.sidebar:hover {
+  width: 200px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.sidebar ul li {
+  display: flex;
+  align-items: center;
+  padding: 17.6px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.sidebar ul li .icon {
+  color: #ffffff;
+  font-size: 20px;
+  margin-right: 10px;
+  width: 30px;
+  text-align: center;
+}
+
+.sidebar ul li .text {
+  color: #ffffff;
+  display: none;
+  white-space: nowrap;
+  font-family: poppins;
+  font-size: 15px;
+}
+
+.sidebar:hover ul li .text {
+  display: inline-block;
+}
+
+/* Pro mobilní zařízení - Sidebar se skryje */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Umožní scrollování až nahoru */
-    height: auto; /* Aby výška těla byla automatická */
-    min-height: 100vh; /* Ujistíme se, že výška stránky je alespoň 100% */
+    padding: 10px 0;
   }
-  
-  @font-face {
-    font-family: poppins;
-    src: url('/autobahn/fonts/Poppins-Black.ttf');
-  }
-  
-  @font-face {
-    font-family: poppins-light;
-    src: url('/autobahn/fonts/Poppins-Light.ttf');
-  }
-  
-  .sidebar {
-    background-image: url('/autobahn/images/sidebar/sidebar_pic.png');
-    background-size: cover;
-    color: #ffffff;
-    width: 60px;
-    height: 100vh;
-    overflow: hidden;
-    transition: width 0.3s ease;
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    left: 0;
-    z-index: 1000;
-  }
-  
+
   .sidebar:hover {
-    width: 200px;
-  }
-  
-  .sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
     width: 100%;
   }
-  
-  .sidebar ul li {
+
+  .sidebar ul {
     display: flex;
-    align-items: center;
-    padding: 17.6px;
-    text-align: center;
-    overflow: hidden;
+    justify-content: center;
   }
-  
-  .sidebar ul li .icon {
-    color: #ffffff;
-    font-size: 20px;
-    margin-right: 10px;
-    width: 30px;
-    text-align: center;
+
+  .sidebar ul li {
+    padding: 10px;
   }
-  
+
   .sidebar ul li .text {
-    color: #ffffff;
-    display: none;
-    white-space: nowrap;
-    font-family: poppins;
-    font-size: 15px;
-  }
-  
-  .sidebar:hover ul li .text {
     display: inline-block;
   }
-  
+
   .vertical-text {
-    writing-mode: vertical-rl;
-    text-orientation: upright;
-    font-size: 20px;
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: transform 0.3s ease, writing-mode 0.3s ease;
-    font-family: poppins;
+    display: none;
   }
-  
-  .sidebar:hover .vertical-text {
-    writing-mode: horizontal-tb;
-    transform: translateY(-50%) rotate(0deg);
-    left: 10%;
-    letter-spacing: 5px;
-  }
+}
 
-  .container {
-    padding: 20px;
-    max-width: 600px;
-    width: 100%;
-    background: rgb(139, 139, 139);
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
-  
-      h1 {
-        color: #ffffff;
-        font-family: poppins;
-      }
+/* Kontejner */
+.container {
+  padding: 20px;
+  max-width: 600px;
+  width: 90%;
+  background: rgb(139, 139, 139);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 
-      .image-container img {
-        max-width: 100%;
-        border-radius: 10px;
-      }
-      .price {
-        margin: 20px 0;
-        font-size: 1.5rem;
-        color: #ffffff;
-        font-weight: bold;
-      }
+h1 {
+  color: #ffffff;
+  font-family: poppins;
+}
 
-      .availability {
-        margin: 10px 0;
-        font-size: 1rem;
-        font-weight: bold;
-        color: #ffffff;
-      }
-      
-      #stockStatus {
-        font-weight: normal;
-      }
-      
-      .in-stock {
-        color: green; /* Zelená pro skladem */
-      }
-      
-      .out-of-stock {
-        color: red; /* Červená pro nedostupné */
-      }      
+.image-container img {
+  max-width: 100%;
+  border-radius: 10px;
+}
 
-      form {
-        margin-top: 20px;
-      }
+/* RESPONSIVNÍ TEXT */
+.price {
+  margin: 20px 0;
+  font-size: 1.5rem;
+  color: #ffffff;
+  font-weight: bold;
+}
 
-      input, button {
-        width: calc(100% - 20px);
-        padding: 10px;
-        margin: 10px 0;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 1rem;
-      }
+.availability {
+  margin: 10px 0;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ffffff;
+}
 
-      button {
-        background-color: #8a1212;
-        color: white;
-        cursor: pointer;
-        border: none;
-        font-family: poppins-light;
-      }
+/* RESPONSIVNÍ FORMULÁŘ */
+form {
+  margin-top: 20px;
+}
 
-      button:disabled {
-        background-color: #ccc;
-        cursor: not-allowed;
-      }
+input, button {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
 
-      button:hover:not(:disabled) {
-        background-color: #6e0a0a;
-      }
-      
-     #adminButton {
-    position: fixed;
-    bottom: 20px;
-    left: 80px !important; /* Posunul jsem tlačítko více doleva */
-    max-width: 150px;
-    background-color: #28a745;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-weight: bold;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    font-family: poppins-light;
+button {
+  background-color: #8a1212;
+  color: white;
+  cursor: pointer;
+  border: none;
+  font-family: poppins-light;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background-color: #6e0a0a;
+}
+
+/* RESPONSIVNÍ ADMIN TLAČÍTKA */
+#adminButton, #resetStockButton {
+  position: fixed;
+  bottom: 20px;
+  max-width: 150px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: poppins-light;
+}
+
+#adminButton {
+  left: 80px;
+  background-color: #28a745;
+  color: white;
 }
 
 #adminButton:hover {
-    background-color: #218838;
+  background-color: #218838;
 }
 
 #resetStockButton {
-    position: fixed;
-    bottom: 20px; 
-    right: 20px !important;
-    max-width: 150px;
-    background-color: #dc3545;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-weight: bold;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    font-family: poppins-light;
+  right: 20px;
+  background-color: #dc3545;
+  color: white;
 }
 
 #resetStockButton:hover {
-    background-color: #c82333;
+  background-color: #c82333;
 }
 
+/* PRO MOBILY - ADMIN TLAČÍTKA */
+@media (max-width: 768px) {
+  #adminButton, #resetStockButton {
+    position: static;
+    display: block;
+    width: 100%;
+    max-width: none;
+    margin: 10px 0;
+    text-align: center;
+  }
+}
+
+/* ADMIN PANEL */
 .admin-controls {
   position: absolute;
   top: 10px;
