@@ -92,33 +92,34 @@ function sendToDiscord(order) {
 
 // 🔹 Přihlášení admina přes e-mail a heslo
 document.getElementById('adminLogin').addEventListener('click', () => {
-  const email = prompt("Zadej email:");
-  const password = prompt("Zadej heslo:");
+    const email = prompt("Zadej email:");
+    const password = prompt("Zadej heslo:");
 
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      console.log("Přihlášení úspěšné:", user.email);
+    if (!email || !password) {
+        alert("Musíš zadat email a heslo!");
+        return;
+    }
 
-      // Ověření, zda je uživatel admin v DB
-      const adminRef = ref(db, "admins/" + user.email.replace(/\./g, ","));
+    signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            const userRef = ref(db, `admins/${email.replace(/\./g, ",")}`);
 
-      get(adminRef).then((snapshot) => {
-        if (snapshot.exists()) {
-          alert(`Přihlášen jako admin: ${user.email}`);
-          showAdminControls();
-        } else {
-          alert("Nemáš oprávnění.");
-          signOut(auth);
-        }
-      });
-    })
-    .catch((error) => {
-      console.error("Chyba přihlášení:", error.message);
-      alert("Chyba přihlášení: " + error.message);
-    });
+            get(userRef).then((snapshot) => {
+                if (snapshot.exists()) {
+                    alert(`Přihlášen jako admin: ${user.email}`);
+                    showAdminControls();
+                } else {
+                    alert("Nemáš oprávnění.");
+                    signOut(auth);
+                }
+            });
+        })
+        .catch((error) => {
+            console.error("Chyba přihlášení:", error.message);
+            alert("Chyba přihlášení: " + error.message);
+        });
 });
-
 // 🔹 Odhlášení admina
 document.getElementById('adminLogout').addEventListener('click', () => {
   signOut(auth).then(() => {
