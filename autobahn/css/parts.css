@@ -8,7 +8,7 @@ body {
   padding: 0;
   background-image: linear-gradient(to right, #C04848, #480048);
   display: flex;
-  justify-content: flex-start; /* Zarovnání obsahu na levý okraj */
+  justify-content: flex-start;
   align-items: flex-start;
   min-height: 100vh;
 }
@@ -34,9 +34,8 @@ body {
   overflow: hidden;
   transition: width 0.3s ease;
   position: fixed;
-  top: 0; /* Ujistíme se, že sidebar je nahoře */
-  left: 0; /* Sidebar bude přilepený k levé straně */
-  right: auto; /* Zajistí, že není posunutý zprava */
+  top: 0; /* Zajišťuje, že sidebar bude nahoře */
+  left: 0; /* Zajišťuje, že sidebar bude přilepený na levé straně */
   z-index: 1000; /* Sidebar bude nad ostatními elementy */
   display: flex;
   flex-direction: column;
@@ -44,7 +43,7 @@ body {
 }
 
 .sidebar:hover {
-  width: 200px; /* Při hoveru se sidebar roztáhne */
+  width: 200px;
 }
 
 .sidebar ul {
@@ -124,6 +123,7 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
   margin-top: 20px;
+  margin-left: 260px; /* Pokud je sidebar široký 200px, přidej tuto hodnotu pro posunutí obsahu */
   margin-bottom: 20px;
 }
 
