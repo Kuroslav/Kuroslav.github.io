@@ -19,9 +19,6 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const auth = getAuth();
 
-// 🔹 ADMIN EMAIL (změň na svůj)
-const ADMIN_EMAIL = "hapic.work@gmail.com";
-
 // 🔹 Sledování skladu
 let stockCount = 0;
 const stockRef = ref(db, "stockCount");
@@ -93,23 +90,28 @@ function sendToDiscord(order) {
   }).catch(console.error);
 }
 
+// 🔹 Přihlášení admina přes e-mail a heslo
 document.getElementById('adminLogin').addEventListener('click', () => {
   const email = prompt("Zadej email:");
   const password = prompt("Zadej heslo:");
 
-  console.log("Přihlašovací údaje:", email, password); // Debugging
-
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
-      console.log("Přihlášení úspěšné:", user.email); // Debugging
-      if (user.email === ADMIN_EMAIL) {
-        alert(`Přihlášen jako admin: ${user.email}`);
-        showAdminControls();
-      } else {
-        alert("Nemáš oprávnění.");
-        signOut(auth);
-      }
+      console.log("Přihlášení úspěšné:", user.email);
+
+      // Ověření, zda je uživatel admin v DB
+      const adminRef = ref(db, "admins/" + user.email.replace(/\./g, ","));
+
+      get(adminRef).then((snapshot) => {
+        if (snapshot.exists()) {
+          alert(`Přihlášen jako admin: ${user.email}`);
+          showAdminControls();
+        } else {
+          alert("Nemáš oprávnění.");
+          signOut(auth);
+        }
+      });
     })
     .catch((error) => {
       console.error("Chyba přihlášení:", error.message);
