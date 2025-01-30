@@ -51,27 +51,29 @@
         </ul>
     </div>
 
-    <div class="container">
-        <h1>Autodíly</h1>
-        <div class="image-container">
-            <img src="images/parts/car-parts.png" alt="Autodíl">
-        </div>
-        <div class="price">Cena: 7.500.000 Kč</div>
-        <div class="availability" id="availability">Dostupnost: Skladem</div>
+   <div class="container">
+  <h1>Autodíly</h1>
+  <div class="image-container">
+    <img src="/images/parts/parts.png" alt="Autodíl">
+  </div>
+  <div class="price">Cena: 7.500.000 Kč</div>
+  <div class="availability" id="availability">Dostupnost: Skladem</div>
+  
+  <form id="orderForm">
+    <input type="text" name="firstName" placeholder="Jméno" required>
+    <input type="text" name="lastName" placeholder="Příjmení" required>
+    <input type="email" name="email" placeholder="E-mail" required>
+    <input type="tel" name="phone" placeholder="Telefon" required>
+    <input type="number" name="quantity" placeholder="Počet" required min="1">
+    <button type="submit">Objednat</button>
+  </form>
 
-        <!-- Formulář pro objednávky -->
-        <form id="orderForm">
-            <input type="text" name="firstName" placeholder="Jméno" required>
-            <input type="text" name="lastName" placeholder="Příjmení" required>
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="tel" name="phone" placeholder="Telefonní číslo" required>
-            <input type="number" id="quantity" name="quantity" placeholder="Počet" required min="1">
-            <button type="submit" id="orderButton">Objednat</button>
-        </form>
-
-        <!-- Admin tlačítka (skrytá pro běžné uživatele) -->
-        <a href="#" id="adminButton" class="admin-button" style="display: none;">📋 Přehled objednávek</a>
-        <a href="#" id="resetStockButton" class="reset-stock-button" style="display: none;">🔄 Obnovit sklad</a>
-    </div>
+  <div class="admin-controls">
+    <button id="adminLogin" class="admin-button">Admin Přihlášení</button>
+    <button id="adminLogout" class="admin-button" style="display:none;">Odhlásit</button>
+    <a href="#" id="adminButton" class="admin-button" style="display:none;">Přehled objednávek</a>
+    <a href="#" id="resetStockButton" class="admin-button" style="display:none;">Obnovit sklad</a>
+  </div>
+</div>
 </body>
 </html>
