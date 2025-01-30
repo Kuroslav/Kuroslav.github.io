@@ -8,50 +8,68 @@
     <script src="https://kit.fontawesome.com/3e6e8225e1.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script src="scripts/parts-script.js" type="module"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js"></script>
 </head>
 <body>
-  
-  <!-- Admin přihlášení/odhlášení vpravo nahoře -->
-  <div class="admin-controls">
-    <button id="adminLogin">Přihlásit se</button>
-    <button id="adminLogout" style="display: none;">Odhlásit se</button>
-  </div>
-
-  <div class="sidebar">
-    <ul>
-        <li><a href="index.html"><i class="fa fa-fw fa-home"></i> Domů</a></li>
-        <li><a href="cars.html"><i class="fa-solid fa-car"></i> Prodej Vozidel</a></li>
-        <li><a href="ex-buy.html"><i class="fa-regular fa-handshake"></i> Výměna/Výkup</a></li>
-        <li><a href="parts.html"><i class="fa-solid fa-screwdriver-wrench"></i> Autodíly</a></li>
-        <li><a href="estates.html"><i class="fa-solid fa-shop"></i> Nemovitosti</a></li>
-        <li><a href="contacts.html"><i class="fa-solid fa-phone"></i> Kontakty</a></li>
-        <div class="vertical-text">AUTOBAHN</div>
-    </ul>
-  </div>
-
-  <div class="container">
-    <h1>Autodíly</h1>
-    <div class="image-container">
-      <img src="/images/parts/parts.png" alt="Autodíl">
+    <!-- Přihlášení admina (menší, bez pozadí, vpravo nahoře) -->
+    <div class="admin-controls">
+        <button id="adminLogin">🔑 Přihlásit</button>
+        <button id="adminLogout" style="display: none;">🚪 Odhlásit</button>
     </div>
-    <div class="price">Cena: 7.500.000 Kč</div>
-    <div class="availability" id="availability">Dostupnost: Skladem</div>
-    
-    <form id="orderForm">
-      <input type="text" name="firstName" placeholder="Jméno" required>
-      <input type="text" name="lastName" placeholder="Příjmení" required>
-      <input type="email" name="email" placeholder="Email" required>
-      <input type="tel" name="phone" placeholder="Telefonní číslo" required>
-      <input type="number" id="quantity" name="quantity" placeholder="Počet" required min="1">
-      <button type="submit" id="orderButton">Objednat</button>
-    </form>
 
-    <!-- Skryté admin funkce -->
-    <div id="adminPanel" style="display: none;">
-      <a href="#" id="adminButton" class="admin-button">Přehled objednávek</a>
-      <a href="#" id="resetStockButton" class="reset-stock-button">Obnovit sklad</a>
+    <div class="sidebar" id="sidebar">
+        <ul>
+            <li>
+                <a href="index.html"><span class="icon"><i class="fa fa-fw fa-home"></i></span></a>
+                <a href="index.html"><span class="text">Domů</span></a>
+            </li>
+            <li>
+                <a href="cars.html"><span class="icon"><i class="fa-solid fa-car"></i></span></a>
+                <a href="cars.html"><span class="text">Prodej Vozidel</span></a>
+            </li>
+            <li>
+                <a href="ex-buy.html"><span class="icon"><i class="fa-regular fa-handshake"></i></span></a>
+                <a href="ex-buy.html"><span class="text">Výměna/Výkup</span></a>
+            </li>
+            <li>
+                <a href="parts.html"><span class="icon"><i class="fa-solid fa-screwdriver-wrench"></i></span></a>
+                <a href="parts.html"><span class="text">Autodíly</span></a>
+            </li>
+            <li>
+                <a href="estates.html"><span class="icon"><i class="fa-solid fa-shop"></i></span></a>
+                <a href="estates.html"><span class="text">Nemovitosti</span></a>
+            </li>
+            <li>
+                <a href="contacts.html"><span class="icon"><i class="fa-solid fa-phone"></i></span></a>
+                <a href="contacts.html"><span class="text">Kontakty</span></a>
+            </li>
+            <div class="vertical-text">AUTOBAHN</div>
+        </ul>
     </div>
-  </div>
 
+    <div class="container">
+        <h1>Autodíly</h1>
+        <div class="image-container">
+            <img src="/images/parts/parts.png" alt="Autodíl">
+        </div>
+        <div class="price">Cena: 7.500.000 Kč</div>
+        <div class="availability" id="availability">Dostupnost: Skladem</div>
+
+        <!-- Formulář pro objednávky -->
+        <form id="orderForm">
+            <input type="text" name="firstName" placeholder="Jméno" required>
+            <input type="text" name="lastName" placeholder="Příjmení" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="tel" name="phone" placeholder="Telefonní číslo" required>
+            <input type="number" id="quantity" name="quantity" placeholder="Počet" required min="1">
+            <button type="submit" id="orderButton">Objednat</button>
+        </form>
+
+        <!-- Admin tlačítka (skrytá pro běžné uživatele) -->
+        <a href="#" id="adminButton" class="admin-button" style="display: none;">📋 Přehled objednávek</a>
+        <a href="#" id="resetStockButton" class="reset-stock-button" style="display: none;">🔄 Obnovit sklad</a>
+    </div>
 </body>
 </html>
