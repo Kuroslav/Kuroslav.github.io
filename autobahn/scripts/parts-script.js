@@ -1,7 +1,7 @@
 // Import Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
 import { getDatabase, ref, get, set, onValue } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
-import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
 
 // Firebase konfigurace
 const firebaseConfig = {
@@ -19,6 +19,27 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
+
+// Odkazy na HTML prvky
+const adminButton = document.getElementById('adminButton');
+const resetStockButton = document.getElementById('resetStockButton');
+
+// Skryjeme admin tlačítka při načtení
+adminButton.style.display = 'none';
+resetStockButton.style.display = 'none';
+
+// Kontrola přihlášení a role uživatele
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    const userRef = ref(db, `users/${user.uid}/role`);
+    get(userRef).then((snapshot) => {
+      if (snapshot.exists() && snapshot.val() === 'admin') {
+        adminButton.style.display = 'inline-block';
+        resetStockButton.style.display = 'inline-block';
+      }
+    });
+  }
+});
 
 // Sledování skladu
 let stockCount = 0;
@@ -46,6 +67,11 @@ document.addEventListener('DOMContentLoaded', () => {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const quantity = parseInt(quantityInput.value, 10);
+    const firstName = form.firstName.value;
+    const lastName = form.lastName.value;
+    const email = form.email.value;
+    const phone = form.phone.value;
+    const orderId = Date.now();
 
     if (isNaN(quantity) || quantity <= 0 || quantity > stockCount) {
       alert('Zadejte platný počet kusů.');
@@ -56,6 +82,17 @@ document.addEventListener('DOMContentLoaded', () => {
     set(stockRef, stockCount);
     updateAvailability(stockCount);
 
+    const order = {
+      id: orderId,
+      firstName,
+      lastName,
+      email,
+      phone,
+      quantity
+    };
+
+    sendToDiscord(order);
+
     alert('Objednávka byla odeslána!');
     form.reset();
     quantityInput.setAttribute('max', stockCount);
@@ -63,10 +100,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function updateAvailability(count) {
-    const stockStatus = document.getElementById('stockStatus');
-    stockStatus.textContent = count > 0 ? `Skladem (${count})` : 'Nedostupný';
-    stockStatus.classList.toggle('in-stock', count > 0);
-    stockStatus.classList.toggle('out-of-stock', count <= 0);
+    const stockStatus = document.getElementById('availability');
+    stockStatus.textContent = count > 0 ? `Dostupnost: Skladem (${count})` : 'Dostupnost: Nedostupné';
     quantityInput.setAttribute('max', count);
   }
 
@@ -75,13 +110,17 @@ document.addEventListener('DOMContentLoaded', () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         const user = result.user;
-        if (user.email === "hapic.work@gmail.com") {  // ZMĚŇ NA SVŮJ EMAIL
-          alert(`Přihlášen jako admin: ${user.displayName}`);
-          document.getElementById('adminPanel').style.display = 'block';
-        } else {
-          alert("Nemáš oprávnění.");
-          signOut(auth);
-        }
+        const userRef = ref(db, `users/${user.uid}/role`);
+        get(userRef).then((snapshot) => {
+          if (snapshot.exists() && snapshot.val() === 'admin') {
+            alert(`Přihlášen jako admin: ${user.displayName}`);
+            adminButton.style.display = 'inline-block';
+            resetStockButton.style.display = 'inline-block';
+          } else {
+            alert("Nemáš oprávnění.");
+            signOut(auth);
+          }
+        });
       })
       .catch((error) => console.error("Chyba přihlášení:", error));
   });
@@ -90,12 +129,13 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('adminLogout').addEventListener('click', () => {
     signOut(auth).then(() => {
       alert("Odhlášen.");
-      document.getElementById('adminPanel').style.display = 'none';
+      adminButton.style.display = 'none';
+      resetStockButton.style.display = 'none';
     });
   });
 
   // Admin reset skladu
-  document.getElementById('resetStockButton').addEventListener('click', () => {
+  resetStockButton.addEventListener('click', () => {
     const restockAmount = prompt('Počet položek k přidání:');
     const restockCount = parseInt(restockAmount, 10);
     if (isNaN(restockCount) || restockCount <= 0) return alert('Neplatný počet.');
@@ -104,3 +144,34 @@ document.addEventListener('DOMContentLoaded', () => {
     alert(`Sklad byl navýšen o ${restockCount} položek.`);
   });
 });
+
+// Odesílání na Discord
+function sendToDiscord(order) {
+    const webhookURL = "https://discord.com/api/webhooks/1334031581873967184/oH8ks4jbvewVhGFEmfax47Gt-6PUhdaY_gum5zUxeX9fY0KdvLiaTcbVdpja9v9LqSCi";
+
+    const message = {
+      content: "**Nová objednávka!** 📦",
+      embeds: [
+        {
+          title: "📋 Detaily objednávky",
+          color: 16773669,
+          fields: [
+            { name: "💳 Jméno", value: `${order.firstName} ${order.lastName}` },
+            { name: "✉️ Email", value: order.email },
+            { name: "📱 Telefon", value: order.phone },
+            { name: "📦 Počet", value: `${order.quantity}` },
+            { name: "🗂️ Číslo objednávky", value: `${order.id}` }
+          ],
+          footer: { text: "Odesláno z webové aplikace" }
+        }
+      ]
+    };
+
+    fetch(webhookURL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(message)
+    })
+    .then(response => console.log("Objednávka odeslána na Discord", response))
+    .catch(error => console.error("Chyba při odesílání na Discord:", error));
+}
