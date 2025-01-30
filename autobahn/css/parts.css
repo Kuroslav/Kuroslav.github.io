@@ -37,10 +37,10 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  top: 0; /* Zajistí, že sidebar je na vrchu */
-  left: 0; /* Sidebar je na levé straně */
-  right: auto; /* Ujistíme se, že není posunutý zprava */
-  z-index: 1000; /* Aby byl nad ostatními elementy */
+  top: 0; /* Sidebar bude na vrchu */
+  left: 0; /* Sidebar bude přilepený k levé straně */
+  right: auto; /* Zajistí, že není posunutý zprava */
+  z-index: 1000; /* Sidebar bude nad ostatními elementy */
 }
 
 .sidebar:hover {
