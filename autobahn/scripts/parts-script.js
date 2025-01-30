@@ -108,16 +108,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateAvailability(count) {
+    console.log("Aktualizace skladu:", count);
+    localStorage.setItem('stockCount', count); // Ujistíme se, že je vždy správně zapsáno
     const stockStatus = document.getElementById('stockStatus');
+
     if (count > 0) {
-      stockStatus.textContent = `Skladem (${count})`;
-      stockStatus.classList.remove('out-of-stock');
-      stockStatus.classList.add('in-stock');
+        stockStatus.textContent = `Skladem (${count})`;
+        stockStatus.classList.remove('out-of-stock');
+        stockStatus.classList.add('in-stock');
     } else {
-      stockStatus.textContent = 'Nedostupný';
-      stockStatus.classList.remove('in-stock');
-      stockStatus.classList.add('out-of-stock');
+        stockStatus.textContent = 'Nedostupný';
+        stockStatus.classList.remove('in-stock');
+        stockStatus.classList.add('out-of-stock');
     }
+
+    console.log("Zapsaná hodnota ve storage:", localStorage.getItem('stockCount'));
+}
 
     const quantityInput = document.getElementById('quantity');
     quantityInput.setAttribute('max', count);
