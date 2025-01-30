@@ -1,65 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Autodíly</title>
-  <link rel="stylesheet" href="css/parts.css">
-  <script src="https://kit.fontawesome.com/3e6e8225e1.js" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-  <script src="scripts/parts-script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objednávkový systém</title>
+    <script type="module" src="script.js"></script>
 </head>
 <body>
-  <div class="sidebar" id="sidebar">
-    <ul>
-        <li>
-            <a href="index.html"><span class="icon"><i class="fa fa-fw fa-home"></i></span></a>
-            <a href="index.html"><span class="text">Domů</span></a>
-        </li>
-        <li>
-            <a href="cars.html"><span class="icon"><i class="fa-solid fa-car"></i></span></a>
-            <a href="cars.html"><span class="text">Prodej Vozidel</span></a>
-        </li>
-        <li>
-            <a href="ex-buy.html"><span class="icon"><i class="fa-regular fa-handshake"></i></span></a>
-            <a href="ex-buy.html"><span class="text">Výměna/Výkup</span></a>
-        </li>
-        <li>
-            <a href="parts.html"><span class="icon"><i class="fa-solid fa-screwdriver-wrench"></i></span></a>
-            <a href="parts.html"><span class="text">Autodíly</span></a>
-        </li>
-        <li>
-            <a href="estates.html"><span class="icon"><i class="fa-solid fa-shop"></i></span></a>
-            <a href="estates.html"><span class="text">Nemovitosti</span></a>
-        </li>
-        <li>
-            <a href="contacts.html"><span class="icon"><i class="fa-solid fa-phone"></i></span></a>
-            <a href="contacts.html"><span class="text">Kontakty</span></a>
-        </li>
-        <div class="vertical-text">AUTOBAHN</div>
-    </ul>
-  </div>
-  
-  <div class="container">
-    <h1>Autodíly</h1>
-    <div class="image-container">
-      <img src="images/parts/car-parts.png" alt="Autodíl">
-    </div>
-    <div class="price">Cena: 7.500.000 Kč</div>
-    <div class="availability" id="availability">
-      Dostupnost: <span id="stockStatus">Skladem</span>
-    </div>    
-    <form id="orderForm" action="javascript:void(0);">
-  <input type="text" name="firstName" placeholder="Jméno" required>
-  <input type="text" name="lastName" placeholder="Příjmení" required>
-  <input type="email" name="email" placeholder="Email" required>
-  <input type="tel" name="phone" placeholder="Telefonní číslo" required>
-  <input type="number" id="quantity" name="quantity" placeholder="Počet" required min="1">
-  <button type="submit" id="orderButton">Objednat</button>
-</form>
 
-<button id="adminButton" class="admin-button">Přehled objednávek</button>
-<button id="resetStockButton" class="reset-stock-button">Obnovit sklad</button>
-  </div>
+    <h1>🛒 Objednávkový systém</h1>
+    <p id="stockStatus">Načítání skladu...</p>
+
+    <form id="orderForm">
+        <label for="firstName">Jméno:</label>
+        <input type="text" id="firstName" name="firstName" required>
+
+        <label for="lastName">Příjmení:</label>
+        <input type="text" id="lastName" name="lastName" required>
+
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phone">Telefon:</label>
+        <input type="tel" id="phone" name="phone" required>
+
+        <label for="quantity">Počet kusů:</label>
+        <input type="number" id="quantity" name="quantity" min="1" required>
+
+        <button type="submit" id="orderButton">🛍️ Odeslat objednávku</button>
+    </form>
+
+    <hr>
+
+    <!-- 🔑 Admin panel -->
+    <button id="adminLogin">🔑 Přihlásit se jako admin</button>
+    <button id="adminLogout" style="display:none;">🚪 Odhlásit se</button>
+
+    <div id="adminPanel" style="display:none;">
+        <h2>📦 Správa skladu</h2>
+        <button id="resetStockButton">🔄 Obnovit sklad</button>
+    </div>
+
 </body>
 </html>
