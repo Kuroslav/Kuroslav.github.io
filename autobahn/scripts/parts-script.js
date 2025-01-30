@@ -19,69 +19,141 @@ const db = getDatabase(app);
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
-// Skrytí/zobrazení admin tlačítek
-auth.onAuthStateChanged((user) => {
-  if (user && user.email === "hapic.work@gmail.com") {  // ZMĚŇ NA SVŮJ EMAIL
-    document.getElementById("adminPanel").style.display = "block";
-    document.getElementById("adminLogin").style.display = "none";
-    document.getElementById("adminLogout").style.display = "inline";
-  } else {
-    document.getElementById("adminPanel").style.display = "none";
-    document.getElementById("adminLogin").style.display = "inline";
-    document.getElementById("adminLogout").style.display = "none";
-  }
+// HTML elementy
+const adminLogin = document.getElementById("adminLogin");
+const adminLogout = document.getElementById("adminLogout");
+const adminButton = document.getElementById("adminButton");
+const resetStockButton = document.getElementById("resetStockButton");
+const orderForm = document.getElementById("orderForm");
+const quantityInput = document.getElementById("quantity");
+const orderButton = document.getElementById("orderButton");
+
+// Webhook URL pro Discord
+const webhookURL = "https://discord.com/api/webhooks/1334031581873967184/oH8ks4jbvewVhGFEmfax47Gt-6PUhdaY_gum5zUxeX9fY0KdvLiaTcbVdpja9v9LqSCi";
+
+// Sledování skladu
+let stockCount = 0;
+const stockRef = ref(db, "stockCount");
+
+onValue(stockRef, (snapshot) => {
+  stockCount = snapshot.exists() ? snapshot.val() : 4;
+  updateAvailability(stockCount);
 });
 
+// Aktualizace dostupnosti skladu
+function updateAvailability(count) {
+  const availability = document.getElementById("availability");
+  availability.textContent = count > 0 ? `Skladem (${count})` : "Nedostupný";
+  quantityInput.setAttribute("max", count);
+  orderButton.disabled = count <= 0;
+}
+
+// Kontrola, jestli je admin
+function checkAdmin(user) {
+  if (user && user.email === "hapic.work@gmail.com") {
+    localStorage.setItem("isAdmin", "true");
+    adminButton.style.display = "inline-block";
+    resetStockButton.style.display = "inline-block";
+    adminLogin.style.display = "none";
+    adminLogout.style.display = "inline-block";
+  } else {
+    localStorage.removeItem("isAdmin");
+  }
+}
+
 // Přihlášení admina
-document.getElementById("adminLogin").addEventListener("click", () => {
-  signInWithPopup(auth, provider).catch((error) => console.error("Chyba přihlášení:", error));
+adminLogin.addEventListener("click", (e) => {
+  e.preventDefault();
+  signInWithPopup(auth, provider)
+    .then((result) => checkAdmin(result.user))
+    .catch((error) => console.error("Chyba přihlášení:", error));
 });
 
 // Odhlášení admina
-document.getElementById("adminLogout").addEventListener("click", () => {
-  signOut(auth);
+adminLogout.addEventListener("click", (e) => {
+  e.preventDefault();
+  signOut(auth).then(() => {
+    localStorage.removeItem("isAdmin");
+    adminButton.style.display = "none";
+    resetStockButton.style.display = "none";
+    adminLogin.style.display = "inline-block";
+    adminLogout.style.display = "none";
+  });
 });
 
-// Funkce odeslání objednávky na Discord
-function sendToDiscord(order) {
-  const webhookURL = "https://discord.com/api/webhooks/1334031581873967184/oH8ks4jbvewVhGFEmfax47Gt-6PUhdaY_gum5zUxeX9fY0KdvLiaTcbVdpja9v9LqSCi";
+// Zachování admin stavu po reloadu
+document.addEventListener("DOMContentLoaded", () => {
+  if (localStorage.getItem("isAdmin") === "true") {
+    adminButton.style.display = "inline-block";
+    resetStockButton.style.display = "inline-block";
+    adminLogin.style.display = "none";
+    adminLogout.style.display = "inline-block";
+  }
+});
 
+// Odeslání objednávky na Discord
+function sendToDiscord(order) {
   const message = {
     content: "**Nová objednávka!** 📦",
-    embeds: [{
-      title: "📋 Detaily objednávky",
-      color: 16773669,
-      fields: [
-        { name: "💳 Jméno", value: `${order.firstName} ${order.lastName}` },
-        { name: "✉️ Email", value: order.email },
-        { name: "📱 Telefon", value: order.phone },
-        { name: "📦 Počet", value: `${order.quantity}` },
-        { name: "🗂️ Číslo objednávky", value: `${order.id}` }
-      ],
-      footer: { text: "Odesláno z webové aplikace" }
-    }]
+    embeds: [
+      {
+        title: "📋 Detaily objednávky",
+        color: 16773669,
+        fields: [
+          { name: "💳 Jméno", value: `${order.firstName} ${order.lastName}` },
+          { name: "✉️ Email", value: order.email },
+          { name: "📱 Telefon", value: order.phone },
+          { name: "📦 Počet", value: `${order.quantity}` },
+          { name: "🗂️ Číslo objednávky", value: `${order.id}` }
+        ],
+        footer: { text: "Odesláno z webové aplikace" }
+      }
+    ]
   };
 
   fetch(webhookURL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(message)
-  }).catch((error) => console.error("Chyba při odesílání na Discord:", error));
+  }).catch((error) => console.error("Chyba odesílání na Discord:", error));
 }
 
 // Odeslání objednávky
-document.getElementById("orderForm").addEventListener("submit", (e) => {
+orderForm.addEventListener("submit", (e) => {
   e.preventDefault();
+
   const order = {
-    firstName: e.target.firstName.value,
-    lastName: e.target.lastName.value,
-    email: e.target.email.value,
-    phone: e.target.phone.value,
-    quantity: e.target.quantity.value,
-    id: Date.now()
+    firstName: orderForm.firstName.value,
+    lastName: orderForm.lastName.value,
+    email: orderForm.email.value,
+    phone: orderForm.phone.value,
+    quantity: parseInt(orderForm.quantity.value, 10),
+    id: `ORD-${Date.now()}`
   };
+
+  if (isNaN(order.quantity) || order.quantity <= 0 || order.quantity > stockCount) {
+    alert("Zadejte platný počet kusů.");
+    return;
+  }
+
+  stockCount -= order.quantity;
+  set(stockRef, stockCount);
+  updateAvailability(stockCount);
 
   sendToDiscord(order);
   alert("Objednávka byla odeslána!");
-  e.target.reset();
+  orderForm.reset();
+});
+
+// Reset skladu (pouze admin)
+resetStockButton.addEventListener("click", () => {
+  const restockAmount = prompt("Počet položek k přidání:");
+  const restockCount = parseInt(restockAmount, 10);
+  if (isNaN(restockCount) || restockCount <= 0) {
+    alert("Neplatný počet.");
+    return;
+  }
+  stockCount += restockCount;
+  set(stockRef, stockCount);
+  alert(`Sklad byl navýšen o ${restockCount} položek.`);
 });
