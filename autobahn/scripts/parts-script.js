@@ -93,14 +93,16 @@ function sendToDiscord(order) {
   }).catch(console.error);
 }
 
-// 🔹 Přihlášení admina (email + heslo)
 document.getElementById('adminLogin').addEventListener('click', () => {
   const email = prompt("Zadej email:");
   const password = prompt("Zadej heslo:");
 
+  console.log("Přihlašovací údaje:", email, password); // Debugging
+
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
+      console.log("Přihlášení úspěšné:", user.email); // Debugging
       if (user.email === ADMIN_EMAIL) {
         alert(`Přihlášen jako admin: ${user.email}`);
         showAdminControls();
@@ -110,6 +112,7 @@ document.getElementById('adminLogin').addEventListener('click', () => {
       }
     })
     .catch((error) => {
+      console.error("Chyba přihlášení:", error.message);
       alert("Chyba přihlášení: " + error.message);
     });
 });
