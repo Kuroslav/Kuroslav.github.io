@@ -37,7 +37,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  left: 0;
+  left: 0; /* Sidebar je na levé straně */
+  right: auto; /* Ujistíme se, že není posunutý zprava */
   z-index: 1000;
 }
 
