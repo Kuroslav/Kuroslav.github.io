@@ -1,0 +1,73 @@
+body{
+    background-image: linear-gradient(to right, #C04848, #480048);
+}
+
+@font-face {
+    font-family: poppins;
+    src: url('/autobahn/fonts/Poppins-Black.ttf');
+}
+
+@font-face {
+    font-family: poppins-light;
+    src: url('/autobahn/fonts/Poppins-Light.ttf');
+}
+
+.container{
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    margin-top: 15vw;
+    background-color: #757575;
+    width: 350px;
+    height: 280px;
+    display: flex;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+input[type="email"]{
+    color: black;
+    width: 300px;
+    height: 35px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    border: none;
+}
+
+input[type="password"]{
+    color: black;
+    width: 300px;
+    height: 35px;
+    border-radius: 5px;
+    border: none;
+}
+
+button[type="submit"]{
+    color: white;
+    background-color: #1a2a6c;
+    padding: 12px 18px;
+    justify-self: left;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+h1.login{
+    font-family: poppins;
+    color: white;
+}
+
+.back {
+    color: white;
+    background-color: #1a2a6c;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: poppins;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+}

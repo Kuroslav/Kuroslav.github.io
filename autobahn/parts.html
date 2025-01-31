@@ -46,29 +46,29 @@
         </ul>
     </div>
 
+    <a id="loginButton" href="login.html" style="display: none">Log-in</a>
+
    <div class="container">
   <h1>Autodíly</h1>
   <div class="image-container">
-    <img src="/images/parts/parts.png" alt="Autodíl">
+    <img src="images/parts/car-parts.png" alt="Autodíl">
   </div>
   <div class="price">Cena: 7.500.000 Kč</div>
-  <div class="availability" id="availability">Dostupnost: Skladem</div>
+       <div class="availability">
+           Dostupnost: <span id="stockCount"></span>
+       </div>
   
   <form id="orderForm">
     <input type="text" name="firstName" placeholder="Jméno" required>
     <input type="text" name="lastName" placeholder="Příjmení" required>
     <input type="email" name="email" placeholder="E-mail" required>
     <input type="tel" name="phone" placeholder="Telefon" required>
-    <input type="number" name="quantity" placeholder="Počet" required min="1">
-    <button type="submit">Objednat</button>
+    <input type="number" name="quantity" id="quantity" placeholder="Počet" required min="1">
+    <button type="submit" id="orderButton">Objednat</button>
+      <button id="adminLogout">Odhlásit</button>
+      <button id="resetStockButton">Obnovit zásoby</button>
+      <button id="ordersOverview">Přehled objednávek</button>
   </form>
-
-  <div class="admin-controls">
-    <button id="adminLogin">🔑</button>
-    <button id="adminLogout" style="display: none;">🚪 Odhlásit</button>
-    <a href="#" id="adminButton" class="admin-button" style="display:none;">Přehled objednávek</a>
-    <a href="#" id="resetStockButton" class="admin-button" style="display:none;">Obnovit sklad</a>
-  </div>
 </div>
 </body>
 </html>

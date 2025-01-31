@@ -7,7 +7,6 @@ body {
   margin: 0;
   padding: 0;
   background-image: linear-gradient(to right, #C04848, #480048);
-  display: flex;
   min-height: 100vh;
 }
 
@@ -79,6 +78,26 @@ body {
   display: inline-block;
 }
 
+
+.vertical-text {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  font-size: 20px;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: transform 0.3s ease, writing-mode 0.3s ease;
+  font-family: poppins;
+}
+
+.sidebar:hover .vertical-text {
+  writing-mode: horizontal-tb;
+  transform: translateY(-50%) rotate(0deg);
+  left: 10%;
+  letter-spacing: 5px;
+}
+
 /* Pro mobilní zařízení - Sidebar se skryje */
 @media (max-width: 768px) {
   .sidebar {
@@ -120,7 +139,9 @@ body {
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
-  margin-left: 260px; /* Posunutí obsahu vedle sidebaru (200px šířka sidebaru + 60px pro okraje) */
+  justify-content: center;
+  justify-self: center;
+  align-items: center;
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -181,41 +202,109 @@ button:hover:not(:disabled) {
   background-color: #6e0a0a;
 }
 
-/* RESPONSIVNÍ ADMIN TLAČÍTKA */
-#adminButton, #resetStockButton {
-  position: fixed;
-  bottom: 20px;
-  max-width: 150px;
-  padding: 10px 20px;
+.admin-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: stretch;
+  width: 100%;
+}
+
+/* Tlačítka pro admin */
+#ordersOverview, #resetStockButton, #adminLogout {
+  padding: 12px 20px;
   border-radius: 5px;
   font-weight: bold;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  font-family: poppins-light;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
 }
+
 
 #adminButton {
-  left: 80px;
-  background-color: #28a745;
+  background-color: #4CAF50;
   color: white;
-}
-
-#adminButton:hover {
-  background-color: #218838;
 }
 
 #resetStockButton {
-  right: 20px;
-  background-color: #dc3545;
+  background-color: #8a1212;
   color: white;
+  right: 20px;
+  bottom: 20px;
+}
+
+#adminLogout {
+  background-color: #8a1212;
+  color: white;
+}
+
+
+#adminButton:hover {
+  background-color: #45a049;
 }
 
 #resetStockButton:hover {
   background-color: #c82333;
 }
 
-/* PRO MOBILY - ADMIN TLAČÍTKA */
+#adminLogout:hover {
+  background-color: #721c24;
+}
+
+/* Pro mobilní zařízení - Upravíme tlačítka pro menší obrazovky */
 @media (max-width: 768px) {
-  #adminButton, #resetStockButton {
+  .admin-controls {
+    width: 100%;
+    padding: 10px;
+  }
+
+  #adminButton, #resetStockButton, #adminLogout {
+    width: 100%; /* Tlačítka budou zabírat celou šířku kontejneru */
+    font-size: 14px; /* Mírně menší text na mobilních zařízeních */
+  }
+}
+
+#adminLogout {
+  background-color: #8a1212;
+  color: white;
+}
+
+
+#resetStockButton {
+  background-color: #c50011;
+  color: white;
+}
+
+
+#ordersOverview {
+  background-color: #28a745;
+  color: white;
+}
+
+#ordersOverview:hover {
+  background-color: #218838;
+}
+
+/* Tlačítko pro přihlášení */
+#loginButton {
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  max-width: 150px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+/* Opravy pro responsivní tlačítka */
+@media (max-width: 768px) {
+  #adminButton, #resetStockButton, #adminLogout {
     position: static;
     display: block;
     width: 100%;
@@ -223,24 +312,10 @@ button:hover:not(:disabled) {
     margin: 10px 0;
     text-align: center;
   }
-}
 
-/* ADMIN PANEL */
-.admin-controls {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-}
-
-.admin-controls button {
-  border: none;
-  background: none;
-  color: #333;
-  cursor: pointer;
-  font-size: 14px;
-  margin-left: 10px;
-}
-
-.admin-controls button:hover {
-  text-decoration: underline;
+  #ordersOverview {
+    position: static;
+    display: block;
+    width: 100%;
+  }
 }
