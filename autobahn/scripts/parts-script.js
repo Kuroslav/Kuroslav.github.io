@@ -20,33 +20,40 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const auth = getAuth();
 
-// Předpokládáme, že počet dílů je uložen v localStorage
-let stockCount = parseInt(localStorage.getItem('stockCount') || '10', 10);
+// Reference na skladové zásoby
+const stockRef = ref(db, 'stockCount');
 
 // Element pro zobrazení dostupnosti
 const availabilityElement = document.getElementById('stockCount');
 
 // Funkce pro zobrazení dostupnosti
 function updateAvailability() {
-  if (stockCount > 0) {
-    availabilityElement.textContent = `Skladem ${stockCount}`;
-    availabilityElement.style.color = 'green'; // Zelená pro skladem
-  } else {
-    availabilityElement.textContent = 'Nedostupný';
-    availabilityElement.style.color = 'red'; // Červená pro nedostupnost
-  }
+  get(stockRef).then(snapshot => {
+    const stockCount = snapshot.exists() ? snapshot.val() : 10; // Defaultní hodnota 10, pokud není záznam
+    if (stockCount > 0) {
+      availabilityElement.textContent = `Skladem ${stockCount}`;
+      availabilityElement.style.color = 'green'; // Zelená pro skladem
+    } else {
+      availabilityElement.textContent = 'Nedostupný';
+      availabilityElement.style.color = 'red'; // Červená pro nedostupnost
+    }
+  }).catch(error => {
+    console.error('Chyba při načítání skladových zásob:', error);
+  });
 }
 
 // Funkce pro objednání dílů
 function orderPart(quantity) {
-  if (quantity <= stockCount) {
-    stockCount -= quantity;
-    localStorage.setItem('stockCount', stockCount);
-    alert(`Objednáno ${quantity} dílů.`);
-    // Případně zapiš objednávku do přehledu nebo pošli na Discord
-  } else {
-    alert('Není dostatečný počet dílů na skladě!');
-  }
+  get(stockRef).then(snapshot => {
+    const stockCount = snapshot.exists() ? snapshot.val() : 10;
+    if (quantity <= stockCount) {
+      set(stockRef, stockCount - quantity); // Uložení nové hodnoty skladových zásob
+      alert(`Objednáno ${quantity} dílů.`);
+      // Případně zapiš objednávku do přehledu nebo pošli na Discord
+    } else {
+      alert('Není dostatečný počet dílů na skladě!');
+    }
+  });
 }
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -164,7 +171,11 @@ document.getElementById('resetStockButton')?.addEventListener('click', async () 
   const parsedAmount = parseInt(restockAmount, 10);
 
   if (!isNaN(parsedAmount) && parsedAmount > 0) {
-    localStorage.setItem('stockCount', (parseInt(localStorage.getItem('stockCount') || '4') + parsedAmount));
+    const currentStockSnapshot = await get(stockRef);
+    const currentStock = currentStockSnapshot.exists() ? currentStockSnapshot.val() : 0;
+    const newStock = currentStock + parsedAmount;
+
+    await set(stockRef, newStock); // Uložení nového stavu skladu do Firebase
     alert('Zásoby byly obnoveny!');
     updateAvailability();  // Aktualizace dostupnosti po obnovení skladu
   }
