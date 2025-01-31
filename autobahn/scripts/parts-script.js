@@ -1,7 +1,7 @@
 // Import Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
-import { getDatabase, ref, get, set, onValue } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
-import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
+import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
+import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
 
 // Firebase konfigurace
 const firebaseConfig = {
@@ -20,9 +20,6 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const auth = getAuth();
 
-// Předpokládáme, že počet dílů je uložen v localStorage
-let stockCount = parseInt(localStorage.getItem('stockCount') || '10', 10);
-
 // Element pro zobrazení dostupnosti
 const availabilityElement = document.getElementById('stockCount');
 
@@ -31,7 +28,7 @@ function updateAvailability() {
   const stockRef = ref(db, 'stock/stockCount');  // Odkaz na stockCount v databázi Firebase
   get(stockRef).then((snapshot) => {
     if (snapshot.exists()) {
-      stockCount = snapshot.val();
+      const stockCount = snapshot.val();
       if (stockCount > 0) {
         availabilityElement.textContent = `Skladem ${stockCount}`;
         availabilityElement.style.color = 'green'; // Zelená pro skladem
@@ -221,5 +218,5 @@ document.getElementById('resetStockButton')?.addEventListener('click', async () 
 
 document.getElementById("ordersOverview")?.addEventListener("click", (e) => {
   e.preventDefault(); // Zabraňuje výchozímu chování
-  window.location.href = "overview.html";  // Přesměruje na přehled objednávek
+  window.location.href = "orders.html";
 });
