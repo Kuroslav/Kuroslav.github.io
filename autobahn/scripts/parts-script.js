@@ -218,5 +218,5 @@ document.getElementById('resetStockButton')?.addEventListener('click', async () 
 
 document.getElementById("ordersOverview")?.addEventListener("click", (e) => {
   e.preventDefault(); // Zabraňuje výchozímu chování
-  window.location.href = "orders.html";
+  window.location.href = "overview.html";  // Přesměruje na přehled objednávek
 });
