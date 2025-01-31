@@ -20,39 +20,66 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const auth = getAuth();
 
-// Reference na skladové zásoby
-const stockRef = ref(db, 'stockCount');
+// Předpokládáme, že počet dílů je uložen v localStorage
+let stockCount = parseInt(localStorage.getItem('stockCount') || '10', 10);
 
 // Element pro zobrazení dostupnosti
 const availabilityElement = document.getElementById('stockCount');
 
 // Funkce pro zobrazení dostupnosti
 function updateAvailability() {
-  get(stockRef).then(snapshot => {
-    const stockCount = snapshot.exists() ? snapshot.val() : 10; // Defaultní hodnota 10, pokud není záznam
-    if (stockCount > 0) {
-      availabilityElement.textContent = `Skladem ${stockCount}`;
-      availabilityElement.style.color = 'green'; // Zelená pro skladem
+  const stockRef = ref(db, 'stock/stockCount');  // Odkaz na stockCount v databázi Firebase
+  get(stockRef).then((snapshot) => {
+    if (snapshot.exists()) {
+      stockCount = snapshot.val();
+      if (stockCount > 0) {
+        availabilityElement.textContent = `Skladem ${stockCount}`;
+        availabilityElement.style.color = 'green'; // Zelená pro skladem
+      } else {
+        availabilityElement.textContent = 'Nedostupný';
+        availabilityElement.style.color = 'red'; // Červená pro nedostupnost
+      }
     } else {
-      availabilityElement.textContent = 'Nedostupný';
-      availabilityElement.style.color = 'red'; // Červená pro nedostupnost
+      console.log("Chyba při načítání informací o skladu.");
     }
-  }).catch(error => {
-    console.error('Chyba při načítání skladových zásob:', error);
+  }).catch((error) => {
+    console.error("Chyba při získávání informací o skladě:", error);
   });
 }
 
 // Funkce pro objednání dílů
 function orderPart(quantity) {
-  get(stockRef).then(snapshot => {
-    const stockCount = snapshot.exists() ? snapshot.val() : 10;
-    if (quantity <= stockCount) {
-      set(stockRef, stockCount - quantity); // Uložení nové hodnoty skladových zásob
-      alert(`Objednáno ${quantity} dílů.`);
-      // Případně zapiš objednávku do přehledu nebo pošli na Discord
+  const stockRef = ref(db, 'stock/stockCount');  // Odkaz na stockCount v databázi Firebase
+  get(stockRef).then((snapshot) => {
+    if (snapshot.exists()) {
+      let stockCount = snapshot.val();
+      if (quantity <= stockCount) {
+        stockCount -= quantity;
+        // Aktualizuj stockCount v databázi
+        set(stockRef, stockCount)
+            .then(() => {
+              alert(`Objednáno ${quantity} dílů. Zbývá skladem: ${stockCount}`);
+              // Případně zapiš objednávku do databáze
+              const orderRef = ref(db, `orders/order${Date.now()}`);
+              set(orderRef, {
+                quantity: quantity,
+                status: 'Objednáno',
+                timestamp: Date.now(),
+              });
+              updateAvailability();  // Aktualizace dostupnosti po objednávce
+            })
+            .catch((error) => {
+              console.error("Chyba při aktualizaci skladu:", error);
+              alert("Došlo k chybě při zpracování objednávky.");
+            });
+      } else {
+        alert("Není dostatečný počet dílů na skladě!");
+      }
     } else {
-      alert('Není dostatečný počet dílů na skladě!');
+      alert("Chyba při načítání informací o skladu.");
     }
+  }).catch((error) => {
+    console.error("Chyba při získávání informací o skladě:", error);
   });
 }
 
@@ -171,13 +198,24 @@ document.getElementById('resetStockButton')?.addEventListener('click', async () 
   const parsedAmount = parseInt(restockAmount, 10);
 
   if (!isNaN(parsedAmount) && parsedAmount > 0) {
-    const currentStockSnapshot = await get(stockRef);
-    const currentStock = currentStockSnapshot.exists() ? currentStockSnapshot.val() : 0;
-    const newStock = currentStock + parsedAmount;
-
-    await set(stockRef, newStock); // Uložení nového stavu skladu do Firebase
-    alert('Zásoby byly obnoveny!');
-    updateAvailability();  // Aktualizace dostupnosti po obnovení skladu
+    const stockRef = ref(db, 'stock/stockCount');
+    get(stockRef).then((snapshot) => {
+      if (snapshot.exists()) {
+        let stockCount = snapshot.val();
+        stockCount += parsedAmount;
+        set(stockRef, stockCount)
+            .then(() => {
+              alert('Zásoby byly obnoveny!');
+              updateAvailability();  // Aktualizace dostupnosti po obnovení skladu
+            })
+            .catch((error) => {
+              console.error("Chyba při obnově skladu:", error);
+              alert("Došlo k chybě při obnově skladu.");
+            });
+      }
+    }).catch((error) => {
+      console.error("Chyba při získávání informací o skladě:", error);
+    });
   }
 });
 
