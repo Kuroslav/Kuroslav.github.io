@@ -158,3 +158,109 @@ div.gallery {
     justify-content: center; /* Zajistí horizontální centrování */
     gap: 20px; /* Rozestupy mezi galeriemi */
 }
+
+@media (max-width: 425px) {
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 15px;
+    }
+
+    nav ul {
+        list-style: none;
+    }
+
+    nav ul li {
+        display: inline;
+    }
+
+    nav ul li a {
+        color: white;
+        text-decoration: none;
+        padding: 4px 4px; /* Přidání paddingu pro lepší klikací plochu */
+        font-size: 10px;
+        display: inline-block;
+    }
+
+    .logo {
+        font-size: 12px; /* Zvětšení velikosti písma */
+        font-weight: bold; /* Tučné písmo pro zvýraznění */
+        color: #FFCC00; /* Barva textu (žlutá) */
+        justify-content: space-between;
+    }
+
+    .form-button {
+        background-color: #ffbb00; /* Tmavě žlutá barva */
+        color: white;
+        padding: 4px 8px;
+        border-radius: 5px;
+        text-decoration: none;
+        margin-top: 10px;
+        cursor: pointer;
+        margin-left: 100px;
+    }
+
+    .footer {
+        text-align: center;
+        padding: 20px 0;
+        background-color:#00386B;
+        color:white;
+        font-size: 15px;
+    }
+
+    div.gallery {
+        margin: 10px;
+        border: 3px solid #ccc;
+        float: left;
+        max-width: 200px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        cursor: default;
+    }
+
+    .service-item {
+        background-color: #f4f4f4; /* Světle šedé pozadí pro položky služeb a vedení */
+        border-radius: 10px; /* Zaoblené rohy pro položky */
+        padding: 8px 20px; /* Vnitřní odsazení */
+        margin: 10px; /* Vnější odsazení */
+        flex-basis: 80%; /* Šířka položky */
+    }
+
+    .service-list {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .service-item .service-image {
+        max-width: 25%; /* Maximální šířka obrázku */
+        height: 25%; /* Automatická výška pro zachování poměru stran */
+        border-radius: 20px;
+    }
+
+    .hero {
+        background-image: url('Pictures/electrician.png'); /* Vložte vlastní fotografii */
+        background-size:cover;
+        background-position: center;
+        color: white;
+        text-align: center;
+        padding: 100px 20px;
+    }
+
+    .hero-content {
+        background-color: rgba(0, 0, 0, 0.5); /* Poloprůhledné pozadí pro lepší čitelnost textu */
+        padding: 20px;
+        height: 1050px;
+        margin-top: 120px;
+    }
+
+    .hero-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px; /* Zaoblené rohy pro obrázek */
+    }
+}
