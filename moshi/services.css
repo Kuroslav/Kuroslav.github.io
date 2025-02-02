@@ -116,26 +116,27 @@ h2.nadpis{
     nav ul li a {
         color: white;
         text-decoration: none;
-        padding: 5px 5px; /* Přidání paddingu pro lepší klikací plochu */
-        font-size: 15px;
+        padding: 4px 4px; /* Přidání paddingu pro lepší klikací plochu */
+        font-size: 10px;
+        display: inline-block;
     }
 
     .logo {
-        font-size: 15px; /* Zvětšení velikosti písma */
+        font-size: 12px; /* Zvětšení velikosti písma */
         font-weight: bold; /* Tučné písmo pro zvýraznění */
         color: #FFCC00; /* Barva textu (žlutá) */
+        justify-content: space-between;
     }
 
     .form-button {
-        display: inline-block;
         background-color: #ffbb00; /* Tmavě žlutá barva */
         color: white;
-        padding: 5px 10px;
+        padding: 4px 8px;
         border-radius: 5px;
         text-decoration: none;
-        margin-top: 5px;
+        margin-top: 10px;
         cursor: pointer;
-        margin-left: 5px;
+        margin-left: 100px;
     }
 
     .footer {
