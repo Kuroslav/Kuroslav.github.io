@@ -45,6 +45,12 @@ function updateAvailability() {
       availabilityElement.textContent =
           stockCount > 0 ? `Skladem ${stockCount}` : "Nedostupný";
       availabilityElement.style.color = stockCount > 0 ? "green" : "red";
+
+      // Deaktivace tlačítka objednání, pokud je stock nedostupný
+      const orderButton = document.getElementById("orderButton");
+      if (orderButton) {
+        orderButton.disabled = stockCount <= 0;  // Pokud není skladem, deaktivuje tlačítko
+      }
     }
   });
 }
