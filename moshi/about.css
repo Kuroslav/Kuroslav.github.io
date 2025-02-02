@@ -142,11 +142,9 @@ nav ul li a:hover {
         background-color: #f4f4f4a6; /* Světle šedé pozadí pro položky služeb a vedení */
         border-radius: 10px; /* Zaoblené rohy pro položky */
         padding: 20px; /* Vnitřní odsazení */
-        margin: 100px; /* Vnější odsazení */
         max-width: 400px;
         margin-top: 20px;
         margin-left: 15px;
-        margin-right: 15px;
         margin-bottom: 40px;
     }
 
