@@ -81,3 +81,17 @@ input[type="password"]{
     font-family: poppins-light;
 }
 
+@media (max-width: 425px) {
+    .container{
+        justify-content: center;
+        align-items: center;
+        justify-self: center;
+        margin-top: 50vw;
+        background-color: #757575;
+        width: 350px;
+        height: 280px;
+        display: flex;
+        border-radius: 5px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+}
