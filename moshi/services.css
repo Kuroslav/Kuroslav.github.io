@@ -148,8 +148,8 @@ h2.nadpis{
     }
 
     .service-item .service-image {
-        max-width: 60%; /* Maximální šířka obrázku */
-        height: 80%; /* Automatická výška pro zachování poměru stran */
+        max-width: 80%; /* Maximální šířka obrázku */
+        height: 50%; /* Automatická výška pro zachování poměru stran */
         border-radius: 20px;
     }
 }
