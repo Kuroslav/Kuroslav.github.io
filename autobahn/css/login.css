@@ -51,6 +51,7 @@ button[type="submit"]{
     border-radius: 5px;
     cursor: pointer;
     margin-top: 15px;
+    font-family: poppins;
 }
 
 h1.login{
@@ -71,3 +72,12 @@ h1.login{
     bottom: 20px;
     left: 20px;
 }
+
+input[type="email"]{
+    font-family: poppins-light;
+}
+
+input[type="password"]{
+    font-family: poppins-light;
+}
+

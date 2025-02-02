@@ -135,7 +135,7 @@ body {
   padding: 20px;
   max-width: 600px;
   width: 90%;
-  background: rgb(139, 139, 139);
+  background: rgb(80, 79, 79);
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
@@ -190,7 +190,7 @@ button {
   color: white;
   cursor: pointer;
   border: none;
-  font-family: poppins-light;
+  font-family: poppins;
 }
 
 button:disabled {
@@ -210,41 +210,77 @@ button:hover:not(:disabled) {
   width: 100%;
 }
 
-/* Tlačítka pro admin */
-#ordersOverview, #resetStockButton, #adminLogout {
-  padding: 12px 20px;
-  border-radius: 5px;
-  font-weight: bold;
-  font-size: 16px;
+#ordersOverview{
   cursor: pointer;
+  background-color: #00bc21;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  position: relative;
+  bottom: 10px;
+  left: 80px;
+  max-width: 250px;
+  border-radius: 5px;
   text-decoration: none;
 }
 
-
-#adminButton {
-  background-color: #4CAF50;
-  color: white;
+#ordersOverview:hover{
+  background-color: #01ac1f;
 }
 
 #resetStockButton {
+  cursor: pointer;
   background-color: #8a1212;
   color: white;
-  right: 20px;
-  bottom: 20px;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  position: relative;
+  bottom: 10px;
+  left: 80px;
+  max-width: 250px;
+  border-radius: 5px;
+  text-decoration: none;
 }
 
-#adminLogout {
-  background-color: #8a1212;
+#resetStockButton:hover {
+  background-color: #6e0a0a;
+}
+
+#loginButton {
+  background-color: #4CAF50;
   color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  max-width: 250px;
+  border-radius: 5px;
+  text-decoration: none;
+  display: none;
 }
-
 
 #adminButton:hover {
   background-color: #45a049;
 }
 
-#resetStockButton:hover {
-  background-color: #c82333;
+#adminLogout {
+  cursor: pointer;
+  background-color: #8a1212;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  max-width: 150px;
+  border-radius: 5px;
+  text-decoration: none;
 }
 
 #adminLogout:hover {
@@ -264,44 +300,6 @@ button:hover:not(:disabled) {
   }
 }
 
-#adminLogout {
-  background-color: #8a1212;
-  color: white;
-}
-
-
-#resetStockButton {
-  background-color: #c50011;
-  color: white;
-}
-
-
-#ordersOverview {
-  background-color: #28a745;
-  color: white;
-}
-
-#ordersOverview:hover {
-  background-color: #218838;
-}
-
-/* Tlačítko pro přihlášení */
-#loginButton {
-  cursor: pointer;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 1000;
-  max-width: 150px;
-  border-radius: 5px;
-  text-decoration: none;
-}
-
 /* Opravy pro responsivní tlačítka */
 @media (max-width: 768px) {
   #adminButton, #resetStockButton, #adminLogout {
@@ -318,4 +316,20 @@ button:hover:not(:disabled) {
     display: block;
     width: 100%;
   }
+}
+
+input[type="text"]{
+  font-family: poppins-light;
+}
+
+input[type="email"]{
+  font-family: poppins-light;
+}
+
+input[type="tel"]{
+  font-family: poppins-light;
+}
+
+input[type="number"]{
+  font-family: poppins-light;
 }
