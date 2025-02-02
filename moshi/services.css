@@ -146,6 +146,7 @@ h2.nadpis{
         font-size: 15px;
     }
 
+    //
     .service-item .service-image {
         max-width: 80%; /* Maximální šířka obrázku */
         height: 80%; /* Automatická výška pro zachování poměru stran */

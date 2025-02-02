@@ -105,7 +105,7 @@ nav ul li a:hover {
         top: 0;
         z-index: 1000;
     }
-
+    //
     .service-item {
         background-color: #f4f4f4a6; /* Světle šedé pozadí pro položky služeb a vedení */
         border-radius: 10px; /* Zaoblené rohy pro položky */
