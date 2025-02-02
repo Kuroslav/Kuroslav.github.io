@@ -36,7 +36,6 @@ const auth = getAuth();
 const availabilityElement = document.getElementById("stockCount");
 
 // Funkce pro zobrazení dostupnosti
-// Funkce pro zobrazení dostupnosti
 function updateAvailability() {
   const stockRef = ref(db, "stock/stockCount");
   onValue(stockRef, (snapshot) => {
@@ -48,8 +47,15 @@ function updateAvailability() {
 
       // Deaktivace tlačítka objednání, pokud je stock nedostupný
       const orderButton = document.getElementById("orderButton");
-      if (orderButton) {
-        orderButton.disabled = stockCount <= 0;  // Pokud není skladem, deaktivuje tlačítko
+      const quantityInput = document.getElementById("quantity");
+
+      if (orderButton && quantityInput) {
+        orderButton.disabled = stockCount <= 0; // Pokud není skladem, deaktivuje tlačítko
+
+        // Dynamické nastavení rozsahu objednávky
+        quantityInput.min = 1;
+        quantityInput.max = stockCount > 0 ? stockCount : 1;
+        quantityInput.value = Math.min(quantityInput.value, stockCount > 0 ? stockCount : 1);
       }
     }
   });
