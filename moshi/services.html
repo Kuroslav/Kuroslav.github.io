@@ -8,20 +8,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="navbar.js" defer></script>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">Moshi Lemons</div>
-            <ul>
-                <li><a class="hov" href="index.html">Domov</a></li> <!-- Odkaz na domovskou stránku -->
-                <li><a class="hov" href="about.html">O nás</a></li> <!-- Odkaz na stránku O nás -->
-                <li><a class="hov" href="services.html">Služby</a></li> <!-- Odkaz na stránku Služby --> 
-                <li><a class="hov" href="workPosition.html">Pracovní pozice</a></li>
-                <li><a class="form-button" onclick="window.open('https://forms.gle/vRrfFZPwShbbL8u7A','_blank')"> Vyplňte náš formulář</a></li>
-            </ul>
-        </nav>
-    </header>
+<nav class="nav">
+    <i class="fa-solid fa-bars navOpenBtn"></i>
+    <a href="index.html" class="logo">Moshi Lemons</a>
+    <ul class="nav-links">
+        <i class="fa-solid fa-xmark navCloseBtn"></i>
+        <li><a href="index.html">Domov</a></li>
+        <li><a href="about.html">O nás</a></li>
+        <li><a href="services.html">Služby</a></li>
+        <li><a href="workPosition.html">Pracovní pozice</a></li>
+    </ul>
+</nav>
 
     <section class="services">
         <h2 class="nadpis">Naše služby</h2>
