@@ -137,7 +137,7 @@ h2.nadpis{
 }
 .service-item .service-image {
     max-width: 50%; /* Maximální šířka obrázku */
-    height: 25%; /* Automatická výška pro zachování poměru stran */
+    height: auto; /* Automatická výška pro zachování poměru stran */
     border-radius: 20px;
 }
 .footer {
