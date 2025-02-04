@@ -294,24 +294,24 @@ div.gallery {
     }
 
     .hero-image {
-        max-width: 100%;
+        max-width: 150%;
         height: auto;
         border-radius: 10px; /* Zaoblené rohy pro obrázek */
     }
-}
 
-.form-button {
-    display: inline-block; 
-    background-color: #ffbb00; /* Tmavě žlutá barva */
-    color: white; 
-    padding: 10px 20px; 
-    border-radius: 5px; 
-    text-decoration: none; 
-    margin-top: 20px; 
-    cursor: pointer;
-    margin-left: 10px;
- }
- 
- .form-button:hover {
-    background-color: #cf9a07; /* Tmavší odstín při hover */
- }
+    .form-button {
+        display: inline-block;
+        background-color: #ffbb00; /* Tmavě žlutá barva */
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        margin-top: 20px;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+
+    .form-button:hover {
+        background-color: #cf9a07; /* Tmavší odstín při hover */
+    }
+}
