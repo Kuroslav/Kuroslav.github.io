@@ -136,7 +136,7 @@ h2.nadpis{
     flex-basis: 30%; /* Šířka položky */
 }
 .service-item .service-image {
-    max-width: 25%; /* Maximální šířka obrázku */
+    max-width: 50%; /* Maximální šířka obrázku */
     height: 25%; /* Automatická výška pro zachování poměru stran */
     border-radius: 20px;
 }
