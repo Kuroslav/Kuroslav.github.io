@@ -6,8 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (navOpenBtn) {
         navOpenBtn.addEventListener("click", () => {
             nav.classList.add("openNav");
-            nav.classList.remove("openSearch");
-            searchIcon.classList.replace("uil-times", "uil-search");
         });
     }
 
