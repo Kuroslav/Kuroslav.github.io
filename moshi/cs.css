@@ -126,23 +126,10 @@ nav ul li a:hover {
    margin-top: 100vh;
 }
 
-/* Styl pro tlačítko Google Forms */
-.form-button {
-    display: inline-block; 
-    background-color: #ffbb00; /* Tmavě žlutá barva */
-    color: white; 
-    padding: 10px 20px; 
-    border-radius: 5px; 
-    text-decoration: none; 
-    margin-top: 20px; 
-    cursor: pointer;
-    margin-left: 20px;
- }
- 
- .form-button:hover {
-    background-color: #cf9a07; /* Tmavší odstín při hover */
- }
-
+.icon{
+    margin-right: 10px;
+    color: white;
+}
 
 @media (max-width: 425px) {
     body {

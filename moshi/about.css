@@ -141,6 +141,11 @@ nav ul li a:hover {
     margin-top: 170px;
 }
 
+.icon{
+    margin-right: 10px;
+    color: white;
+}
+
 @media (max-width: 425px) {
 
     .about{

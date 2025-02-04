@@ -235,6 +235,11 @@ div.gallery {
     gap: 20px; /* Rozestupy mezi galeriemi */
 }
 
+.icon{
+    margin-right: 10px;
+    color: white;
+}
+
 @media (max-width: 425px) {
     .footer {
         text-align: center;
@@ -308,7 +313,6 @@ div.gallery {
         text-decoration: none;
         margin-top: 20px;
         cursor: pointer;
-        margin-left: 10px;
     }
 
     .form-button:hover {
