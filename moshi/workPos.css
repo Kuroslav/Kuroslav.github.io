@@ -185,6 +185,7 @@ b.pozice{
    margin-top: 20px; 
    cursor: pointer;
    margin-left: 20px;
+    border: none;
 }
 
 .form-button:hover {
