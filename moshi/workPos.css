@@ -179,7 +179,7 @@ b.pozice{
    display: inline-block; 
    background-color: #ffbb00; /* Tmavě žlutá barva */
    color: white; 
-   padding: 10px 20px; 
+   padding: 20px 30px;
    border-radius: 5px; 
    text-decoration: none; 
    margin-top: 20px; 
@@ -309,7 +309,7 @@ div.gallery {
     text-decoration: none; 
     margin-top: 20px; 
     cursor: pointer;
-    margin-left: 20px;
+    margin-left: 10px;
  }
  
  .form-button:hover {
