@@ -274,7 +274,7 @@ body {
   }
 
   .sidebar:hover {
-    width: 150px; /* Sidebar se rozbalí na 200px */
+    width: 150px;
   }
 
   .sidebar ul {

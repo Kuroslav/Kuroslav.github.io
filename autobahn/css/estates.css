@@ -395,7 +395,6 @@ button.next:hover {
     width: 30px;
   }
 
-  /* Text (zobrazí se pouze při hoveru) */
   .sidebar ul li .text {
     color: #ffffff;
     display: none;
