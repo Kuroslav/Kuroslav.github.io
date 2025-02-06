@@ -8,6 +8,7 @@
     background-color: rgba( 0, 0, 0, 0.2) ;
     background-image: url("/autobahn/images/majetek/vila.png");
     background-size: cover;
+    margin-left: 80px;
   }
   
   @font-face {
@@ -32,6 +33,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    left: 0;
   }
   
   .sidebar:hover {
@@ -92,54 +94,58 @@
     letter-spacing: 5px;
   }
   
-  /*Button*/
-  button{
-    background-color: rgb(0, 148, 0);
-    border: 0;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba( 0, 0, 0, 0.2);
-    color: #ffffff;
-    padding: 10px 25px;
-    font-family: poppins;
-    margin-bottom: 8px;
-  }
-  
-  button.close {
-  position: absolute; /* Absolutní pozicování */
-  bottom: 20px; /* Od spodního okraje modalu */
-  right: 20px; /* Od pravého okraje modalu */
-  background-color: rgb(177, 1, 1); /* Barva tlačítka */
-  color: #fff; /* Bílý text */
-  border: none; /* Bez rámečku */
-  padding: 10px 20px; /* Vnitřní okraje tlačítka */
-  border-radius: 5px; /* Zaoblené rohy */
-  font-family: poppins; /* Font */
-  font-size: 16px; /* Velikost textu */
-  cursor: pointer; /* Ukazatel myši */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Stín tlačítka */
+/* Základní styl tlačítek */
+button {
+  background-color: rgb(0, 148, 0);
+  border: 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+  padding: 10px 25px;
+  font-family: poppins;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
-  button.close:hover{
-    background-color: rgb(200, 0, 0);
-  } 
+button:hover {
+  background-color: rgb(1, 134, 1);
+}
 
-  button:hover{
-    background-color: rgb(1, 134, 1);
-  }
-  
-/*Gallerie*/
+/* Zavírací tlačítko v modalu */
+button.close {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: rgb(177, 1, 1);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-family: poppins;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.2s ease;
+}
+
+button.close:hover {
+  background-color: rgb(200, 0, 0);
+}
+
+/* Galerie */
 div.gallery {
   border: 3px solid #ccc;
-  background-color: rgba( 0, 0, 0, 0.3);    
-  float: left;
+  background-color: rgba(0, 0, 0, 0.3);
   max-width: 400px;
   border-radius: 5px;
+  float: left;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: 10px;
-  margin-top: 10px;
+  padding: 10px;
 }
 
 div.gallery img {
@@ -158,11 +164,8 @@ div.desc {
   justify-content: center;
 }
 
-.margin{
-  margin-left: 120px;
-}
-
-.modal-container{
+/* Modal */
+.modal-container {
   background-color: rgba(78, 78, 78, 0.678);
   position: fixed;
   pointer-events: none;
@@ -178,39 +181,37 @@ div.desc {
   font-family: poppins-light;
 }
 
-.modal-container.show{
+.modal-container.show {
   pointer-events: auto;
   opacity: 1;
 }
 
-.modal{
+.modal {
   background-color: #444;
-  box-shadow: 0 2px 4px rgba( 0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   color: #ffffff;
   padding: 30px 50px;
   border-radius: 5px;
-  width: 1000px;
-  height: 800px;
-  max-width: 100%;
+  width: 90%;
+  max-width: 1000px;
+  height: auto;
   text-align: left;
   position: relative;
+  max-height: 80vh;
+  overflow-y: auto;
 }
 
 .modal img {
   margin-bottom: 20px;
   max-height: 400px;
+  width: 100%;
+  object-fit: cover;
 }
 
-
-.blod{
-  font-family: poppins;
-}
-  
-/*Navigations modal*/
+/* Navigační slider */
 .slider {
   position: relative;
-  max-width: 80%;
-  height: auto;
+  max-width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -232,8 +233,83 @@ div.desc {
 
 .slide.active {
   display: block;
-
 }
+
+/* Responzivní úpravy */
+@media (max-width: 1024px) {
+  .modal {
+    width: 95%;
+    padding: 20px;
+  }
+
+  button {
+    padding: 8px 20px;
+  }
+
+  button.close {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  body{
+    margin-left: 45px;
+  }
+
+  div.gallery {
+    max-width: 100%;
+  }
+
+  .modal {
+    width: 60%;
+    max-height: 80vh;
+    padding: 15px;
+  }
+
+  .modal img {
+    max-height: 200px;
+  }
+
+  .slider {
+    max-width: 100%;
+  }
+
+  button {
+    padding: 8px 16px;
+  }
+
+  button.close {
+    bottom: 10px;
+    right: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal {
+    width: 80%;
+    height: 70vh;
+    border-radius: 0;
+    padding: 10px;
+  }
+
+  .modal img {
+    max-height: 250px;
+  }
+
+  button {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+
+  button.close {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+}
+
+
 
 button.prev,
 button.next {

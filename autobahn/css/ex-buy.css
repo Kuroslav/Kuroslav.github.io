@@ -5,6 +5,7 @@
 body {
   margin: 0;
   display: flex;
+  flex-direction: column;
   background-image: linear-gradient(to right,#c0392b, #8e44ad);
 }
 
@@ -113,24 +114,24 @@ button:hover{
   background-color: rgb(83, 83, 83);
 }
 
-.button-container{
+.button-container {
   margin-top: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.blod{
+.blod {
   font-family: poppins;
 }
 
-/*Kontaktní údaje*/
-h2.nadpisos{
+/* Kontaktní údaje */
+h2.nadpisos {
   font-family: poppins;
   color: #ffffff;
 }
 
-p.info{
+p.info {
   font-family: poppins-light;
   color: #ffffff;
 }
@@ -138,7 +139,8 @@ p.info{
 /* Container */
 .container {
   position: relative;
-  width: 500px;
+  width: 90%; /* Přizpůsobí se menším obrazovkám */
+  max-width: 500px; /* Maximální šířka */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -148,80 +150,116 @@ p.info{
   padding: 20px 15px;
   border-radius: 5px;
   flex-direction: column;
-  margin-top: 50px;
+  margin: 50px auto; /* Vycentrování */
 }
 
+/* Wrapper pro kontejnery */
 .containers-wrapper {
-  display: flex; /* Aktivuje flexbox pro rodiče */
-  justify-content: center; /* Zarovná kontejnery na střed (vodorovně) */
-  gap: 500px; /* Přidá mezery mezi kontejnery */
+  display: flex;
+  justify-content: center;
+  gap: 50px; /* Menší mezery pro lepší responzivitu */
+  flex-wrap: wrap; /* Zajištění zalomení na menších obrazovkách */
 }
 
-#ic{
+/* Media query pro menší obrazovky */
+@media (max-width: 768px) {
+  body{
+    margin-left: 80px;
+  }
+
+  .containers-wrapper {
+    flex-direction: column; /* Na mobilu kontejnery pod sebou */
+    align-items: center; /* Zarovnání na střed */
+  }
+  
+  .container {
+    width: 100%; /* Na menších displejích využije celou šířku */
+    max-width: 400px; /* Omezí maximální šířku */
+  }
+
+  p.popisek {
+    font-size: 12px;
+    max-width: 100%;
+    text-align: center;
+    margin-left: 0;
+  }
+  
+  h1.nadpisek {
+    font-size: 18px;
+    text-align: center;
+    margin-left: 0;
+  }
+
+  p.popisek-main,
+  p.popisek-main2 {
+    font-size: 12px;
+    text-align: center;
+    margin: 10px auto;
+    max-width: 90%;
+  }
+
+  .vymena,
+  .vykup {
+    margin-left: 0;
+    text-align: center;
+    width: 100%;
+  }
+
+  .container-popisy,
+  .container-popisek {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+#ic {
   margin-right: 5px;
 }
 
-p.popisek{
+p.popisek {
   color: #ffffff;
   font-family: poppins-light;
-  margin-left: 80px;
+  text-align: center;
 }
 
-p.popisek-main{
+p.popisek-main,
+p.popisek-main2 {
   color: #ffffff;
   font-family: poppins-light;
-  margin: 20px 0;
-  margin-left: 140px;
-  margin-top: 20px;
+  margin: 20px auto;
   font-size: 12px;
   display: flex;
+  justify-content: center;
+  text-align: center;
 }
 
-p.popisek-main2{
-  color: #ffffff;
-  font-family: poppins-light;
-  margin: 20px 0;
-  margin-left: 250px;
-  margin-top: 20px;
-  font-size: 12px;
-  display: flex;
-}
-
-h1.nadpisek{
+h1.nadpisek {
   color: #ffffff;
   font-family: poppins;
-  margin-left: 80px;
+  text-align: center;
   font-size: 20px;
 }
 
-.vymena{
+.vymena,
+.vykup {
   flex: 1;
   padding: 10px;
-  margin-left: 30px;
+  text-align: center;
 }
 
-.vykup{
-  flex: 1;
-  padding: 10px;
-  margin-left:190px;
-}
-
-.container-popisy{
+.container-popisy,
+.container-popisek {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
-.container-popisek{
-  display: flex;
-  margin-left: 30px;
-}
-
-.pos1{
+.pos1,
+.pos2 {
   flex: 1;
 }
 
-.pos2{
-  flex: 1;
-}
 
 @media (max-width: 425px) {
   .sidebar {
