@@ -174,7 +174,7 @@ p.info {
   
   .container {
     width: 100%; /* Na menších displejích využije celou šířku */
-    max-width: 400px; /* Omezí maximální šířku */
+    max-width: 400px;
   }
 
   p.popisek {

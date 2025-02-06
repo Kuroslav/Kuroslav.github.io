@@ -1,6 +1,6 @@
 const carDetails = {
     car1: {
-        name: "Mercedes Benz CLS500",
+        name: "Mercedes Benz-CLS500",
         vin: "19456",
         chip: "Úprava ECU - výkon",
         lock: "Žádný",

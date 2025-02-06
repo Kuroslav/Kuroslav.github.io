@@ -236,7 +236,7 @@ body {
     }
 
     .car-card {
-      width: 100%; /* Na mobilech karty zabírají celou šířku */
+      width: 100%;
       min-width: auto;
     }
   
