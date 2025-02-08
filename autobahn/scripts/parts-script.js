@@ -101,40 +101,55 @@ function orderPart(quantity, orderDetails) {
   });
 }
 
-const url = ref(db, "url/web");
+const urlRef = ref(db, "url/web");
+get(urlRef).then((snapshot) => {
+  if (snapshot.exists()) {
+    const webhookURL = snapshot.val();
+    sendToDiscord(order, webhookURL);
+  } else {
+    console.error("Webhook URL není v databázi!");
+  }
+});
+
 
 // Funkce pro odeslání objednávky na Discord
 function sendToDiscord(order) {
-  const webhookURL = `${url}`;
 
-  const message = {
-    content: "**Nová objednávka!** 📦",
-    embeds: [
-      {
-        title: "📋 Detaily objednávky",
-        color: 16773669,
-        fields: [
-          { name: "💳 Jméno", value: `${order.firstName} ${order.lastName}` },
-          { name: "✉️ Email", value: order.email },
-          { name: "📱 Telefon", value: order.phone },
-          { name: "📦 Počet", value: `${order.quantity}` },
-          { name: "🗂️ Číslo objednávky", value: `${order.id}` },
-        ],
-        footer: { text: "Odesláno z webové aplikace" },
-      },
-    ],
-  };
+  function sendToDiscord(order, webhookURL) {
+    if (!webhookURL) {
+      console.error("Webhook URL není k dispozici!");
+      return;
+    }
 
-  fetch(webhookURL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(message),
-  })
-      .then((response) => {
-        if (!response.ok) throw new Error("Chyba při odesílání na Discord");
-        console.log("Objednávka byla odeslána na Discord!");
-      })
-      .catch((error) => console.error("Chyba:", error));
+    const message = {
+      content: "**Nová objednávka!** 📦",
+      embeds: [
+        {
+          title: "📋 Detaily objednávky",
+          color: 16773669,
+          fields: [
+            {name: "💳 Jméno", value: `${order.firstName} ${order.lastName}`},
+            {name: "✉️ Email", value: order.email},
+            {name: "📱 Telefon", value: order.phone},
+            {name: "📦 Počet", value: `${order.quantity}`},
+            {name: "🗂️ Číslo objednávky", value: `${order.id}`},
+          ],
+          footer: {text: "Odesláno z webové aplikace"},
+        },
+      ],
+    };
+
+    fetch(webhookURL, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(message),
+    })
+        .then((response) => {
+          if (!response.ok) throw new Error("Chyba při odesílání na Discord");
+          console.log("Objednávka byla odeslána na Discord!");
+        })
+        .catch((error) => console.error("Chyba:", error));
+  }
 }
 
 // Funkce pro správu UI
