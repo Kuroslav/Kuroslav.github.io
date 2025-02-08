@@ -101,10 +101,11 @@ function orderPart(quantity, orderDetails) {
   });
 }
 
+const url = ref(db, "url/web");
+
 // Funkce pro odeslání objednávky na Discord
 function sendToDiscord(order) {
-  const webhookURL =
-      "https://discord.com/api/webhooks/1334031581873967184/oH8ks4jbvewVhGFEmfax47Gt-6PUhdaY_gum5zUxeX9fY0KdvLiaTcbVdpja9v9LqSCi";
+  const webhookURL = `${url}`;
 
   const message = {
     content: "**Nová objednávka!** 📦",
