@@ -127,16 +127,24 @@ function sendToDiscord(orderDetails) {
         title: "📋 Detaily objednávky",
         color: 16773669,
         fields: [
-          {name: "💳 Jméno", value: `${order.firstName} ${order.lastName}`},
-          {name: "✉️ Email", value: order.email},
-          {name: "📱 Telefon", value: order.phone},
-          {name: "📦 Počet", value: `${order.quantity}`},
-          {name: "🗂️ Číslo objednávky", value: `${order.id}`},
+          { name: "💳 Jméno", value: `${orderDetails.firstName} ${orderDetails.lastName}` },
+          { name: "✉️ Email", value: orderDetails.email },
+          { name: "📱 Telefon", value: orderDetails.phone },
+          { name: "📦 Počet", value: `${orderDetails.quantity}` },
+          { name: "🗂️ Číslo objednávky", value: `${orderDetails.id}` },
         ],
-        footer: {text: "Odesláno z webové aplikace"},
+        footer: { text: "Odesláno z webové aplikace" },
       },
     ],
   };
+
+  fetch(window.webhookURL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(message),
+  })
+      .then(response => console.log("Odesláno na Discord:", response))
+      .catch(error => console.error("Chyba při odesílání na Discord:", error));
 }
 
 
