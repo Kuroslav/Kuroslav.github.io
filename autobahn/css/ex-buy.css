@@ -6,7 +6,7 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  background-image: linear-gradient(to right,#c0392b, #8e44ad);
+  background-image: linear-gradient(to right, #910d00, #5b0c7a);
 }
 
 @font-face {
@@ -145,10 +145,10 @@ p.info {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  background-color: #6e6e6ede;
-  border: 3px solid white;
+  background-color: rgba(110, 109, 109, 0.55);
+  border: 2px solid white;
   padding: 20px 15px;
-  border-radius: 5px;
+  border-radius: 15px;
   flex-direction: column;
   margin: 50px auto; /* Vycentrování */
 }

@@ -6,7 +6,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-image: linear-gradient(to right, #C04848, #480048);
+  background-color: #2e3034;
   min-height: 100vh;
 }
 
@@ -187,7 +187,7 @@ body {
     padding: 15px;
     max-width: 300px;
     width: 50%;
-    background: rgb(80, 79, 79);
+    background: rgb(23, 21, 21);
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -206,19 +206,19 @@ body {
   padding: 20px;
   max-width: 600px;
   width: 90%;
-  background: rgb(80, 79, 79);
+  background: rgb(23, 21, 21);
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
   justify-content: center;
   justify-self: center;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 80px;
   margin-bottom: 20px;
 }
 
 h1 {
-  color: #ffffff;
+  color: #eee;
   font-family: poppins;
 }
 
@@ -231,7 +231,7 @@ h1 {
 .price {
   margin: 20px 0;
   font-size: 1.5rem;
-  color: #ffffff;
+  color: #eee;
   font-weight: bold;
 }
 
@@ -239,7 +239,7 @@ h1 {
   margin: 10px 0;
   font-size: 1rem;
   font-weight: bold;
-  color: #ffffff;
+  color: #eee;
 }
 
 /* RESPONSIVNÍ FORMULÁŘ */
@@ -262,6 +262,7 @@ button {
   cursor: pointer;
   border: none;
   font-family: poppins;
+  width: 35%;
 }
 
 button:disabled {
@@ -391,16 +392,45 @@ button:hover:not(:disabled) {
 
 input[type="text"]{
   font-family: poppins-light;
+  background-color: #303245;
+  border-radius: 12px;
+  border: 0;
+  box-sizing: border-box;
+  color: #eee;
+  outline: 0;
+  width: 70%;
 }
 
 input[type="email"]{
   font-family: poppins-light;
+  background-color: #303245;
+  border-radius: 12px;
+  border: 0;
+  box-sizing: border-box;
+  color: #eee;
+  outline: 0;
+  width: 70%;
 }
 
 input[type="tel"]{
   font-family: poppins-light;
+  background-color: #303245;
+  border-radius: 12px;
+  border: 0;
+  box-sizing: border-box;
+  color: #eee;
+  outline: 0;
+  width: 70%;
 }
 
 input[type="number"]{
   font-family: poppins-light;
+  background-color: #303245;
+  border-radius: 12px;
+  border: 0;
+  box-sizing: border-box;
+  color: #eee;
+  outline: 0;
+  width: 70%;
 }
+

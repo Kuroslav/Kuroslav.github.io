@@ -16,12 +16,12 @@ body{
     justify-content: center;
     align-items: center;
     justify-self: center;
-    margin-top: 15vw;
+    margin-top: 12vw;
     background-color: #757575;
-    width: 350px;
-    height: 280px;
+    width: 400px;
+    height: 350px;
     display: flex;
-    border-radius: 5px;
+    border-radius: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
