@@ -139,7 +139,7 @@ p.info {
 /* Container */
 .container {
   position: relative;
-  width: 90%; /* Přizpůsobí se menším obrazovkám */
+  width: 90%;
   max-width: 500px; /* Maximální šířka */
   display: flex;
   justify-content: center;

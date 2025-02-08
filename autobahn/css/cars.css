@@ -228,7 +228,6 @@ body {
     margin-top: 20px;
   }
   
-  /* Media query pro mobilní zařízení */
   @media (max-width: 768px) {
     .container {
       max-width: 90%;
