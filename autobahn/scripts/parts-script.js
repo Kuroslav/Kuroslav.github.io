@@ -61,7 +61,6 @@ function updateAvailability() {
   });
 }
 
-// Zavolání updateAvailability při načtení stránky
 document.addEventListener("DOMContentLoaded", updateAvailability);
 
 // Funkce pro objednání dílů
