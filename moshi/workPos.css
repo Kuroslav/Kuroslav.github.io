@@ -166,9 +166,11 @@ b.pozice1{
     padding: 8px 20px; /* Vnitřní odsazení */
     margin: 10px; /* Vnější odsazení */
     flex-basis: 30%; /* Šířka položky */
-    height: 300px;
+    height: 200px;
     justify-conten: center;
     align-items: center;
+    text-align: cenetr;
+    dispaly: flex;
 }
 .service-item .service-image {
     max-width: 25%; /* Maximální šířka obrázku */
