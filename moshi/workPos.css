@@ -150,6 +150,11 @@ b.pozice{
     font-size: 18px;
 }
 
+b.pozice1{
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
 .service-list {
     display: flex;
     justify-content: space-around; /* Rozložení položek do řady */
