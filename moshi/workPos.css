@@ -166,10 +166,11 @@ b.pozice1{
     padding: 8px 20px; /* Vnitřní odsazení */
     margin: 10px; /* Vnější odsazení */
     flex-basis: 30%; /* Šířka položky */
+    max-height: 350px;
 }
 .service-item .service-image {
     max-width: 25%; /* Maximální šířka obrázku */
-    height: 35%; /* Automatická výška pro zachování poměru stran */
+    height: 25%; /* Automatická výška pro zachování poměru stran */
     border-radius: 20px;
 }
 .footer {
