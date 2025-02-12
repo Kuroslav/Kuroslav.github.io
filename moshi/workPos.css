@@ -148,6 +148,7 @@ nav ul li a:hover {
 
 b.pozice{
     font-size: 18px;
+    margin-bottom: 25px;
 }
 
 .service-list {
@@ -161,6 +162,7 @@ b.pozice{
     padding: 8px 20px; /* Vnitřní odsazení */
     margin: 10px; /* Vnější odsazení */
     flex-basis: 30%; /* Šířka položky */
+    height: 150px;
 }
 .service-item .service-image {
     max-width: 25%; /* Maximální šířka obrázku */
@@ -185,7 +187,8 @@ b.pozice{
    margin-top: 20px; 
    cursor: pointer;
    margin-left: 20px;
-    border: none;
+   border: none;
+   font-weight: bold;
 }
 
 .form-button:hover {
