@@ -100,20 +100,20 @@ function orderPart(quantity, orderDetails) {
     }
   });
 }
-const urlRef = ref(db, "url/webhookURL"); // 👈 Ulož webhook sem v databázi
+const urlRef = ref(db, "url/webhookURL");
 get(urlRef)
     .then((snapshot) => {
       if (snapshot.exists()) {
         const webhookURL = snapshot.val();
         console.log("Načteno webhook URL:", webhookURL);
-        window.webhookURL = webhookURL; // Uloží URL pro pozdější použití
+        window.webhookURL = webhookURL;
       } else {
         console.error("Webhook URL nenalezeno!");
       }
     })
     .catch((error) => console.error("Chyba při načítání webhook URL:", error));
 
-// 📨 Funkce pro odesílání objednávek na Discord
+
 function sendToDiscord(orderDetails) {
   if (!window.webhookURL) {
     console.error("Webhook URL není k dispozici!");
