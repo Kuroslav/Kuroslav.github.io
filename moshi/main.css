@@ -1,0 +1,18 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    line-height: 1.6;
+    background-image: url('Pictures/lemonbg.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center top -60px;
+}
+
+@media (max-width: 425px) {
+    body {
+        background-image: url('Pictures/moshi_mobile.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center top 60px;
+    }
+}
