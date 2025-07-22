@@ -5,7 +5,7 @@ body {
     background-image: url('Pictures/lemonbg.png');
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center top -60px;
+    background-position: center top -90px;
 }
 
 @media (max-width: 425px) {
